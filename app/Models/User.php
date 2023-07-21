@@ -17,8 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['username', 'password', 'email'];
-
+    protected $fillable = ['username', 'email', 'password', 'campus_id'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -39,7 +38,20 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    //  MANY TO MANY
     public function role(){
         return $this->belongsToMany(Role::class);
+    }
+
+    // ONE TO MANY
+    // Get the campus that relate to the user
+    public function campus(){
+        return $this->belongsTo(Campus::class);
+    }
+
+    // MANY TO ONE
+    // Get the USERS PROJECTS
+    public function projects(){
+        return $this->hasMany(Project::class);
     }
 }

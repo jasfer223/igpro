@@ -9,11 +9,15 @@ class Campus extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['location'];
 
-    //Get user on specific campus
+    //Get users on specific campus
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+     public function projects(){
+        return $this->belongsToMany(Project::class);
     }
 }

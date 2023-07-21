@@ -15,13 +15,10 @@ return new class extends Migration
             $table -> id();
             $table -> string('username');
             $table -> string('email')->unique();
-            $table -> timestamp('email_verified_at') -> nullable();
+            $table -> foreignId('campus_id')
+                ->contrained('campuses')
+                ->onDelete('cascade'); 
             $table -> string('password');
-            $table -> rememberToken();
-
-            // Establishes the foreign key constraint
-            $table->foreignId('campus_id')->constrained('users')->onDelete('cascade');
-
             $table -> timestamps();
         });
     }
