@@ -9,4 +9,9 @@ class AdminController extends Controller
     public function showAdminDashboard(){
         return view('admin.dashboard');
     }
+
+     public function adminLogout(){
+        return redirect(route('login'));
+    }
+
 }

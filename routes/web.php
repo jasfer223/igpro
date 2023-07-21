@@ -16,20 +16,21 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-// INDEX
+// INDEX ROUTES
 Route::get('/', [IndexController::class, 'redirectToLogin'])->name('index');
-
-// LOGIN
 Route::get('/login', [UserController::class, 'showLogin'])->name('login');
 
-// ADMIN
+
+// ADMIN ROUTES
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'showAdminDashboard'])->name('admin.dashboard');
+    // Route::middleware('admin')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'showAdminDashboard'])->name('admin.dashboard');
+        Route::post('/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
+
+    // });
 });
 
-// USER
-Route::prefix('user')->group(function () {
-    Route::name('user.')->group(function () {
-        Route::get('/dashboard', [UserController::class, 'showDashboard'])->name('dashboard');
-    });
-});
+// USER ROUTES
+Route::get('/dashboard', [UserController::class, 'showDashboard'])->name('user.dashboard');
+
+
