@@ -40,8 +40,11 @@
     <label class="input-group-text" for="inputGroupSelect01">Role</label>
   </div>
   <select class="custom-select" id="inputGroupSelect01">
-    <option value="1">User</option>
-    <option value="2">Admin</option>
+    @foreach ($roles as $role)
+        <option value="{{ $role->id }}">{{ $role->role_name}}</option>
+     
+    @endforeach
+    
   </select>
 </div>
 
@@ -90,9 +93,9 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
+                                        
                                             @foreach ($usersWithRoles as $user)
-                                                
+                                                <tr>
                                                 <td>{{ $user->username }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->campus->location }}</td>
@@ -105,10 +108,10 @@
                                                     <button class="btn btn-primary" type="button">Edit</button>
                                                     <button class="btn btn-warning" type="button">Delete</button>
                                                 </td>
-                                          
+                                          </tr>
                                             @endforeach
 
-                                        </tr>
+                                        
                                     
                                     </tbody>
                                 </table>
