@@ -94,8 +94,8 @@
                                     </tfoot>
                                     <tbody>
                                         
-                                            @foreach ($usersWithRoles as $user)
-                                                <tr>
+                                        @foreach ($usersWithRoles as $user)
+                                            <tr>
                                                 <td>{{ $user->username }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->campus->location }}</td>
@@ -109,7 +109,7 @@
                                                     <button class="btn btn-warning" type="button">Delete</button>
                                                 </td>
                                           </tr>
-                                            @endforeach
+                                        @endforeach
 
                                         
                                     

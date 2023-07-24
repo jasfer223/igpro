@@ -44,7 +44,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item {{ Route::currentRouteName() === 'admin.dashboard' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -59,7 +59,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item  {{ Route::currentRouteName() === 'admin.users' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.users') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Users</span>
@@ -67,7 +67,7 @@
             </li>
 
             <!-- Nav Item - Campus Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item  {{ Route::currentRouteName() === 'admin.campuses' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.campuses') }}">
                     <i class="fas fa-fw fa-school"></i>
                     <span>Campuses</span>
@@ -75,7 +75,7 @@
             </li>
 
             <!-- Nav Item - Role Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item {{ Route::currentRouteName() === 'admin.roles' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.roles') }}">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Roles</span>

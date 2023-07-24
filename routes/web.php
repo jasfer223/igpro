@@ -24,10 +24,8 @@ Route::post('/login', [UserController::class, 'authenticate'])->name('auth');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout'); // Logout (applies to both users and admins)
 
 // Role-based middleware for other routes
-Route::name('user.')->group(function () {
-    // Your user-specific routes go here
-    Route::get('/dashboard', [UserController::class, 'showDashboard'])->name('dashboard');
-});
+Route::get('/dashboard', [UserController::class, 'showDashboard'])->name('user.dashboard');
+Route::get('/manage/projects', [UserController::class, 'showProjects'])->name('user.projects');
 
 // Admin-specific middleware for admin routes
 Route::prefix('admin')->group(function () {

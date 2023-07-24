@@ -26,6 +26,9 @@ class UserController extends Controller
         return view('user.dashboard');
     }
 
+    public function showProjects(){
+        return view('user.projects');
+    }
     
 
     public function authenticate(Request $request)
