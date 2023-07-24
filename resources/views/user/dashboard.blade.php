@@ -1,6 +1,6 @@
 <!-- resources/views/user/dashboard.blade.php -->
 
-@extends('layouts.app')
+@extends('layouts.user')
 
 @section('title', 'Dashboard')
 
