@@ -72,7 +72,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            
                                             <th>Username</th>
                                             <th>Email</th>
                                             <th>Campus</th>
@@ -82,36 +82,32 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            <th>Username</th>
+                                            <th>Email</th>
+                                            <th>Campus</th>
+                                            <th>Role</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
-                                            <td>Admin123</td>
-                                            <td>admin@mail.com</td>
-                                            <td>Tandag</td>
-                                            <td>Admin</td>
-                                            <td>
+                                            @foreach ($usersWithRoles as $user)
+                                                
+                                                <td>{{ $user->username }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->campus->location }}</td>
+                                                <td>
+                                                    @foreach ($user->roles as $role)
+                                                        {{ $role->role_name }},
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary" type="button">Edit</button>
+                                                    <button class="btn btn-warning" type="button">Delete</button>
+                                                </td>
+                                          
+                                            @endforeach
 
-                                                <button class="btn btn-primary" type="button">Edit</button>
-                                                <button class="btn btn-warning" type="button">Delete</button>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>User</td>
-                                            <td>user@mail.com</td>
-                                            <td>Tandag</td>
-                                            <td>User123</td>
-                                            <td><button class="btn btn-primary" type="button">Edit</button>
-                                                <button class="btn btn-warning" type="button">Delete</button></td>
                                         </tr>
                                     
                                     </tbody>

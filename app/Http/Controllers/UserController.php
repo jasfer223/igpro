@@ -39,7 +39,7 @@ class UserController extends Controller
 
         if(Auth::attempt($credentials)) {
             $user = Auth::user();
-
+            //query for all user
 
             if ($user->isAdmin()) {
                 return redirect()->route('admin.dashboard');
