@@ -19,6 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // view()->composer([
+        //     'admin.dashboard',
+        //     'admin.users',
+
+        // ], function($view){
+        //     $view->with('campuses', User::all());
+        // });
     }
 }

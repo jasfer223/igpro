@@ -51,4 +51,13 @@ class UserController extends Controller
         return redirect()->route('login')->withErrors(['message' => 'Invalid login credentials.']);
     }
 
+    public function logout(){
+          Auth::logout();
+
+        // You can add any additional logic you want after the user is logged out.
+
+        // For example, you can redirect the user to a specific page after logout.
+        return redirect()->route('login');
+    }
+
 }
