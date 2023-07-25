@@ -19,8 +19,19 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
+
+
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+  
+
+    {{-- FOR DATATABLE --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+    <script defer src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+    <script defer src="{{ asset('js/admin/datatable.js') }}"></script>
 
 </head>
 
@@ -77,7 +88,7 @@
             <!-- Nav Item - Role Collapse Menu -->
             <li class="nav-item {{ Route::currentRouteName() === 'admin.roles' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.roles') }}">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-cogs"></i>
                     <span>Roles</span>
                 </a>
             </li>

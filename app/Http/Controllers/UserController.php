@@ -12,13 +12,7 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
 
-    public function index() {
-       //
-    }
-
     public function showLogin(){
-         // $usersWithRoles = User::with('roles')->get();
-        // return view('login', compact('usersWithRoles'));
         return view('login');
     }
 
@@ -55,11 +49,7 @@ class UserController extends Controller
     }
 
     public function logout(){
-          Auth::logout();
-
-        // You can add any additional logic you want after the user is logged out.
-
-        // For example, you can redirect the user to a specific page after logout.
+        Auth::logout();
         return redirect()->route('login');
     }
 

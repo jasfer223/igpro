@@ -34,6 +34,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/manage/users', [AdminController::class, 'showUsers'])->name('admin.users');
     Route::get('/manage/campuses', [AdminController::class, 'showCampus'])->name('admin.campuses');
     Route::get('/manage/roles', [AdminController::class, 'showRoles'])->name('admin.roles');
+    Route::post('/manage/users/create', [AdminController::class, 'createUser'])->name('create-user');
+    Route::post('/manage/campuses/create', [AdminController::class, 'createCampus'])->name('create-campus');
+    Route::post('/manage/roles/create', [AdminController::class, 'createRole'])->name('create-role');
 
 });
 
