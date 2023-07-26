@@ -17,28 +17,47 @@ use App\Models\User;
 |
 */
 
-// Login/Logout Routes
+// LOGIN
 Route::get('/', [UserController::class, 'showLogin']);
 Route::get('/login', [UserController::class, 'showLogin'])->name('login');
-Route::post('/login', [UserController::class, 'authenticate'])->name('auth');
-Route::post('/logout', [UserController::class, 'userLogout'])->name('user-logout');
-Route::post('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin-logout');
+Route::post('/login/auth', [UserController::class, 'authenticate'])->name('auth');
 
-// Role-based middleware for other routes
-Route::get('/dashboard', [UserController::class, 'showDashboard'])->name('user.dashboard');
-Route::get('/manage/projects', [UserController::class, 'showProjects'])->name('user.projects');
+// USER 
+Route::middleware('auth')->group(function () {
+    
+    // User Logout
+    Route::post('/logout', [UserController::class, 'userLogout'])->name('user-logout');
 
-// Admin-specific middleware for admin routes
-Route::prefix('admin')->group(function () {
-    // Your admin-specific routes go here
+    // User Dashboard
+    Route::get('/dashboard', [UserController::class, 'showDashboard'])->name('user.dashboard');
+
+    // User Manage Projects
+    Route::get('/manage/projects', [UserController::class, 'showProjects'])->name('user.projects');
+
+});
+
+// ADMIN 
+Route::middleware('auth', 'admin')->prefix('admin')->group(function () {
+    
+    // Admin Logout
+    Route::post('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin-logout');
+
+    // Admin Dashboard
     Route::get('/dashboard', [AdminController::class, 'showAdminDashboard'])->name('admin.dashboard');
+    
+    // Admin Manage Users
     Route::get('/manage/users', [AdminController::class, 'showUsers'])->name('admin.users');
-    Route::get('/manage/campuses', [AdminController::class, 'showCampus'])->name('admin.campuses');
-    Route::get('/manage/roles', [AdminController::class, 'showRoles'])->name('admin.roles');
     Route::post('/manage/users/create', [AdminController::class, 'createUser'])->name('create-user');
-    Route::post('/manage/campuses/create', [AdminController::class, 'createCampus'])->name('create-campus');
-    Route::post('/manage/roles/create', [AdminController::class, 'createRole'])->name('create-role');
+    
 
+    // Admin Manage Campus
+    Route::get('/manage/campuses', [AdminController::class, 'showCampus'])->name('admin.campuses');
+    Route::post('/manage/campuses/create', [AdminController::class, 'createCampus'])->name('create-campus');
+    
+    // Admin Manage Roles
+    Route::get('/manage/roles', [AdminController::class, 'showRoles'])->name('admin.roles');
+    Route::post('/manage/roles/create', [AdminController::class, 'createRole'])->name('create-role');
+    
 });
 
     
