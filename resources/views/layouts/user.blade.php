@@ -156,7 +156,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.dashboard') }}">
                                     <span class="d-none d-sm-inline mr-1">ADMIN MODE</span>
-                                    <i class="fas fa-user-circle fa-fw"></i>
+                                    <i class="fas fa-user fa-fw"></i>
                                 </a>
                             </li>
                         @endif
