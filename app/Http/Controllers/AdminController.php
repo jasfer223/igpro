@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Campus;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -16,13 +17,33 @@ class AdminController extends Controller
         $usersCount = User::count();
         $campusesCount = Campus::count();
         $rolesCount = Role::count();
+        $adminsCount = User::whereHas('roles', function ($query) {
+            $query->where('role_name', 'Admin');
+        })->count();
+        $projectsCount = Project::count();
 
+        // Get the count of projects in each campus
+        $campuses = Campus::all();
+        $campusData = [];
+        foreach ($campuses as $campus) {
+            $projectCount = Project::whereHas('campuses', function ($query) use ($campus) {
+                $query->where('campus_id', $campus->id);
+            })->count();
+
+            $campusData[] = [
+                'location' => $campus->location,
+                'projects_count' => $projectCount,
+            ];
+        }
 
         // $projectsLenght = YourModel::count();
         return view('admin.dashboard', [
             'usersCount' => $usersCount,
             'campusesCount' => $campusesCount,
             'rolesCount' => $rolesCount,
+            'adminsCount' => $adminsCount,
+            'projectsCount' => $projectsCount,
+            'campusData' => $campusData,
         ]);
     }
 

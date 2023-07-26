@@ -25,6 +25,10 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+
+    {{-- USER MODE BUTTON STYLE--}}
+    {{-- <link rel="stylesheet" href="{{ asset('css/admin/user-mode-btn.css') }}"> --}}
+
 </head>
 
 <body id="page-top">
@@ -151,15 +155,36 @@
                             </div>
                         </li>
 
+
                         {{-- ADMIN MODE --}}
+
+
+                      {{--   @if (auth()->user()->hasAnyRole('Admin'))
+                        <div class="nav-item">
+                            <div class="nav-link">
+                                <!-- Toggle switch for User Mode and Admin Mode -->
+                                <div class="switch">
+                                  <label>
+                                    <input type="checkbox" id="modeSwitch">
+                                    <span class="slider"></span>
+                                    <span class="d-none d-sm-inline ml-2" id="modeLabel">User Mode</span>
+                                  </label>
+                                </div>
+                            </div>
+                          </div>
+                        @endif --}}
+
                         @if (auth()->user()->hasAnyRole('Admin'))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.dashboard') }}">
-                                    <span class="d-none d-sm-inline mr-1">ADMIN MODE</span>
-                                    <i class="fas fa-user fa-fw"></i>
+                                    <span class="d-none d-sm-inline mr-1 text-gray-700">ADMIN MODE</span>
+                                    {{-- <i class="fas fa-user fa-fw"></i> --}}
+
                                 </a>
                             </li>
                         @endif
+
+
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -167,7 +192,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->username }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    <i class="fas fa-user fa-fw pr-1"></i>
+                                    {{ auth()->user()->username }}</span>
                                 {{-- <img class="img-profile rounded-circle" src="{{ asset('images/myphoto.png') }}"
                                     alt="..."> --}}
                             </a>
@@ -278,6 +305,16 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
+
+{{-- 
+    <script>
+  window.userDashboardUrl = "{{ route('user.dashboard') }}";
+  window.adminDashboardUrl = "{{ route('admin.dashboard') }}";
+</script>
+
+
+
+    <script src="{{ asset('js/admin/toggle-mode.js') }}"></script> --}}
 
 
 </body>

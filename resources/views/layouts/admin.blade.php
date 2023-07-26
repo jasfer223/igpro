@@ -29,7 +29,9 @@
 
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
-  
+
+    {{-- USER MODE BUTTON STYLE--}}
+    {{-- <link rel="stylesheet" href="{{ asset('css/admin/user-mode-btn.css') }}"> --}}
 
     {{-- FOR DATATABLE --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
@@ -163,11 +165,40 @@
                         </li>
 
 
+                        <div class="row">              
+                            <div class="col-sm-5">
+                              <button type="button" class="btn btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                <div class="handle"></div>
+                              </button>
+                            </div>
+
+                            <div class="col-sm-5">
+                              <button type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off">
+                                <div class="handle"></div>
+                              </button>
+                            </div>
+
+                          </div>
+
+{{--                           <div class="nav-item">
+                            <div class="nav-link">
+
+                                <div class="switch">
+                                  <label>
+                                    <input type="checkbox" id="modeSwitch">
+                                    <span class="slider"></span>
+                                    <span class="d-none d-sm-inline ml-2" id="modeLabel">User Mode</span>
+                                  </label>
+                                </div>
+                            </div>
+                          </div>
+                         --}}
+
                         <!-- USER MODE -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.dashboard') }}">
-                                <span class="d-none d-sm-inline mr-1">USER MODE</span>
-                                <i class="fas fa-user fa-fw"></i>
+                                <span class="d-none d-sm-inline mr-1 text-gray-700">USER MODE</span>
+                                {{-- <i class="fas fa-user fa-fw"></i> --}}
                             </a>
                         </li>
 
@@ -176,8 +207,11 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->username }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    <i class="fas fa-user-secret pr-1"></i>
+                                    {{ auth()->user()->username }}</span>
                                 {{-- <img class="img-profile rounded-circle" src="{{ asset('images/myphoto.png') }}"
                                     alt="..."> --}}
                             </a>
@@ -286,8 +320,21 @@
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
+{{--     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script> --}}
+
+{{-- 
+    <script>
+  window.userDashboardUrl = "{{ route('user.dashboard') }}";
+  window.adminDashboardUrl = "{{ route('admin.dashboard') }}";
+</script>
+
+
+
+    <script src="{{ asset('js/admin/toggle-mode.js') }}"></script> --}}
+
+
+    <script src="{{ asset('js/admin/doughnut-charts.js') }}"></script>
 
 
 </body>
