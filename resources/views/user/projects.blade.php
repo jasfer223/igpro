@@ -2,11 +2,10 @@
 
 @extends('layouts.user')
 
-@section('title', 'Projects')
+@section('title', 'NEMSU | IGPro')
 
 @section('content')
-    <h1>Projects</h1>
-    <p>This is the Projects page of our user section.</p>
-    <p>Feel free to explore and enjoy the content!</p>
-    <p>ajsdnas</p>
+<div class="container-fluid">
+    <h4>Manage Projects</h4>
+</div>
 @endsection

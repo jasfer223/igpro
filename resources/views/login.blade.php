@@ -21,6 +21,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/user/login.css') }}">
 
 </head>
 
@@ -38,8 +39,11 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block">
-                                <img src="{{ asset('images/nemsu.jpg') }}" width="100%" height="100%" alt="nemsu">
-                            </div>
+    <div class="image-container">
+        <img src="{{ asset('images/nemsu3.jpg') }}" alt="nemsu" class="fit-image">
+    </div>
+</div>
+
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -53,12 +57,12 @@
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email">
-                                            <span class="text-xs text-danger">@error('email') {{$message}} @enderror</span>
+                                        <span class="text-xs text-danger pl-3">@error('email') {{$message}} @enderror</span>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Password">
-                                            <span class="text-xs text-danger">@error('password') {{$message}} @enderror</span>
+                                            <span class="text-xs text-danger pl-3">@error('password') {{$message}} @enderror</span>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">

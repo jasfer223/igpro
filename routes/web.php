@@ -17,11 +17,12 @@ use App\Models\User;
 |
 */
 
-// Login Routes
+// Login/Logout Routes
 Route::get('/', [UserController::class, 'showLogin']);
 Route::get('/login', [UserController::class, 'showLogin'])->name('login');
 Route::post('/login', [UserController::class, 'authenticate'])->name('auth');
-Route::post('/logout', [UserController::class, 'logout'])->name('logout'); // Logout (applies to both users and admins)
+Route::post('/logout', [UserController::class, 'userLogout'])->name('user-logout');
+Route::post('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin-logout');
 
 // Role-based middleware for other routes
 Route::get('/dashboard', [UserController::class, 'showDashboard'])->name('user.dashboard');

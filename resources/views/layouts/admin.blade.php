@@ -11,6 +11,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    {{-- ICON --}}
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.png') }}">
+    
     <title>@yield('title')</title>
 
     <!-- Custom fonts for this template-->
@@ -251,7 +254,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <form action="{{ route('logout') }}" method="POST">
+                    <form action="{{ route('admin-logout') }}" method="POST">
                         @csrf
                         <button class="btn btn-primary">Logout</button>
                     </form>

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Campus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -24,7 +25,8 @@ class AdminController extends Controller
         ]);
     }
 
-     public function adminLogout(){
+    public function adminLogout(){
+        Auth::logout();
         return redirect(route('login'));
     }
 
