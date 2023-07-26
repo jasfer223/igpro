@@ -17,14 +17,18 @@ use App\Models\User;
 |
 */
 
-// LOGIN
-Route::get('/', [UserController::class, 'showLogin']);
-Route::get('/login', [UserController::class, 'showLogin'])->name('login');
-Route::post('/login/auth', [UserController::class, 'authenticate'])->name('auth');
+Route::middleware('is-auth')->group(function () {
 
-// USER 
+    // LOGIN
+    Route::get('/', [UserController::class, 'showLogin']);
+    Route::get('/login', [UserController::class, 'showLogin'])->name('login');
+    Route::post('/login/auth', [UserController::class, 'authenticate'])->name('auth');
+
+});
+
 Route::middleware('auth')->group(function () {
     
+    // USER 
     // User Logout
     Route::post('/logout', [UserController::class, 'userLogout'])->name('user-logout');
 
@@ -36,9 +40,10 @@ Route::middleware('auth')->group(function () {
 
 });
 
-// ADMIN 
+
 Route::middleware('auth', 'admin')->prefix('admin')->group(function () {
     
+    // ADMIN 
     // Admin Logout
     Route::post('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin-logout');
 

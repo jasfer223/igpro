@@ -52,7 +52,7 @@
         <div class="input-group-prepend">
             <label class="input-group-text" for="role">Role</label>
         </div>
-        <select class="custom-select" id="role" name="role">
+        <select class="custom-select" id="role" name="role[]">
             @foreach ($roles as $role)
                 <option value="{{ $role->id }}">{{ $role->role_name }}</option>
             @endforeach

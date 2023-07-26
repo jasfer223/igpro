@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function showAdminDashboard(){
+    public function showAdminDashboard()
+    {
         $usersCount = User::count();
         $campusesCount = Campus::count();
         $rolesCount = Role::count();

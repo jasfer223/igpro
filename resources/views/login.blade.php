@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>IGPro Login</title>
+    <title>NEMSU | IGPro</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -39,10 +39,10 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block">
-    <div class="image-container">
-        <img src="{{ asset('images/nemsu3.jpg') }}" alt="nemsu" class="fit-image">
-    </div>
-</div>
+                                <div class="image-container">
+                                    <img src="{{ asset('images/nemsu3.jpg') }}" alt="nemsu" class="fit-image">
+                                </div>
+                            </div>
 
                             <div class="col-lg-6">
                                 <div class="p-5">

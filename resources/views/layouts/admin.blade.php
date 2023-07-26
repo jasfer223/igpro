@@ -162,6 +162,15 @@
                             </div>
                         </li>
 
+
+                        <!-- USER MODE -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.dashboard') }}">
+                                <span class="d-none d-sm-inline mr-1">USER MODE</span>
+                                <i class="fas fa-user fa-fw"></i>
+                            </a>
+                        </li>
+
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->

@@ -151,6 +151,16 @@
                             </div>
                         </li>
 
+                        {{-- ADMIN MODE --}}
+                        @if (auth()->user()->hasAnyRole('Admin'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                                    <span class="d-none d-sm-inline mr-1">ADMIN MODE</span>
+                                    <i class="fas fa-user-circle fa-fw"></i>
+                                </a>
+                            </li>
+                        @endif
+
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
