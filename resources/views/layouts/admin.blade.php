@@ -98,6 +98,15 @@
                 </a>
             </li>
 
+
+            <!-- Nav Item - Role Collapse Menu -->
+            <li class="nav-item {{ Route::currentRouteName() === 'admin.projects' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.projects') }}">
+                    <i class="fas fa-fw fa-cubes"></i>
+                    <span>Projects</span>
+                </a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

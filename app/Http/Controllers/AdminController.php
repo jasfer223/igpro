@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Campus;
 use App\Models\Project;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -154,5 +155,10 @@ class AdminController extends Controller
 
         return redirect()->route('admin.roles');
 
+    }
+
+    public function showProjects(){
+        $projects = Project::all(); // Query all role value
+        return view('admin.projects', compact('projects'));
     }
 }

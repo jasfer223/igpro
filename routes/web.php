@@ -62,6 +62,10 @@ Route::middleware('auth', 'admin')->prefix('admin')->group(function () {
     // Admin Manage Roles
     Route::get('/manage/roles', [AdminController::class, 'showRoles'])->name('admin.roles');
     Route::post('/manage/roles/create', [AdminController::class, 'createRole'])->name('create-role');
+
+    // Admin Manage Projects
+    Route::get('/manage/projects', [AdminController::class, 'showProjects'])->name('admin.projects');
+    Route::post('/manage/projects/create', [AdminController::class, 'createProject'])->name('create-project');
     
 });
 

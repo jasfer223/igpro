@@ -29,6 +29,11 @@
     {{-- USER MODE BUTTON STYLE--}}
     {{-- <link rel="stylesheet" href="{{ asset('css/admin/user-mode-btn.css') }}"> --}}
 
+    {{-- FOR DATATABLE --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+    <script defer src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+    <script defer src="{{ asset('js/admin/datatable.js') }}"></script>
+
 </head>
 
 <body id="page-top">
@@ -68,7 +73,7 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item {{ Route::currentRouteName() === 'user.projects' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('user.projects') }}">
-                    <i class="fas fa-fw fa-user"></i>
+                    <i class="fas fa-fw fa-cubes"></i>
                     <span>Projects</span>
                 </a>
             </li>

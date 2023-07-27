@@ -18,6 +18,6 @@ class Campus extends Model
     }
 
      public function projects(){
-        return $this->belongsToMany(Project::class);
+        return $this->belongsToMany(Project::class, 'campus_project', 'project_id', 'campus_id');
     }
 }

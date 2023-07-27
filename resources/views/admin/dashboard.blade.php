@@ -183,17 +183,20 @@
                         <span class="mr-2">
                             <i class="fas fa-circle text-info"></i> Lianga
                         </span> 
+
                         <span class="mr-2">
-                            <i class="fas fa-circle text-secondary"></i> Bislig
+                            <i class="fas fa-circle text-warning"></i> Tagbina
                         </span>
+                            
                         <span class="mr-2">
                             <i class="fas fa-circle text-dark"></i> Cagwait
                         </span>
                         <span class="mr-2">
                             <i class="fas fa-circle text-danger"></i> San Miguel
                         </span>
+                        
                         <span class="mr-2">
-                            <i class="fas fa-circle text-warning"></i> Tagbina
+                            <i class="fas fa-circle text-secondary"></i> Bislig
                         </span>
                     </div>
                 </div>

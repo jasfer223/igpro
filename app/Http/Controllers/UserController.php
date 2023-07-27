@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Role;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Project;
+
 
 
 class UserController extends Controller
@@ -24,7 +27,8 @@ class UserController extends Controller
     }
 
     public function showProjects(){
-        return view('user.projects');
+        $projects = Project::all(); // Query all role value
+        return view('user.projects', compact('projects'));
     }
     
 

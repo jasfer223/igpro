@@ -17,7 +17,7 @@ class Admin
     {
         // IF not logged in and not logged in as admin
         if(!auth()->check() || !auth()->user()->isAdmin()) {
-            return back();
+            return abort(403);
         } 
 
         return $next($request);

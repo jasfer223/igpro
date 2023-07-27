@@ -17,14 +17,7 @@ class CampusProject extends Model
         return $this->belongsTo(AccomplishmentReport::class);
     }
 
-
-    // MANY TO ONE
-    public function campuses(){
-        return $this->hasMany(Campus::class);
-    }
-
-    // MANY TO ONE
-    public function projects(){
-        return $this->hasMany(Project::class);
+    public function statuses(){
+        return $this->belongsTo(Status::class);
     }
 }
