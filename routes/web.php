@@ -54,7 +54,6 @@ Route::middleware('auth', 'admin')->prefix('admin')->group(function () {
     Route::get('/manage/users', [AdminController::class, 'showUsers'])->name('admin.users');
     Route::post('/manage/users/create', [AdminController::class, 'createUser'])->name('create-user');
     
-
     // Admin Manage Campus
     Route::get('/manage/campuses', [AdminController::class, 'showCampus'])->name('admin.campuses');
     Route::post('/manage/campuses/create', [AdminController::class, 'createCampus'])->name('create-campus');

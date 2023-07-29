@@ -17,7 +17,15 @@ class Campus extends Model
         return $this->hasMany(User::class);
     }
 
-     public function projects(){
-        return $this->belongsToMany(Project::class, 'campus_project', 'project_id', 'campus_id');
+
+    public function projects(){
+        return $this->belongsToMany(Project::class, 'campus_project', 'project_id', 'campus_id')
+            ->withPivot('status_id');;
     }
+
+    public function statuses() {
+        return $this->belongsToMany(Status::class, 'campus_project', 'campus_id', 'status_id')
+        ->withPivot('project_id');
+    }
+
 }

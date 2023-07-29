@@ -12,13 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('accomplishment_reports', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('campus_project_id')->constrained('campus_project')->onDelete('cascade');
-            $table->foreignId('success_indicator_id')->constrained('success_indicators')->onDelete('cascade');
+            $table->id(); 
             $table->string('target');
             $table->integer('quantity');
             $table->string('quantity_remarks');
-            $table->string('percentage');
+            $table->decimal('percentage');
             $table->string('percentage_remarks');
             $table->timestamps();
         });

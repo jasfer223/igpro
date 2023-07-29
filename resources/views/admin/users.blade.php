@@ -5,7 +5,6 @@
 
 @section('content')
     <div class="container-fluid">
-        <h4>Manage Users</h4>
 
         @if(session('success'))
             <div class="alert alert-success">
@@ -21,6 +20,13 @@
 
         <!-- DataTables Example -->
         <div class="card shadow mb-4">
+            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Users</h6>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-download fa-sm text-white-50"></i> 
+                Generate Report
+            </a>
+            </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
@@ -28,7 +34,8 @@
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
-                            Add New
+                           <i class="fas fa-plus fa-sm text-white-50 mr-1"></i> 
+                           Add New
                         </button>
 {{-- ADD A USER FORM --}}
 <form method="POST" action="{{ route('create-user') }}" id="createUserForm">
@@ -49,21 +56,18 @@
 
   
     <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text" for="role">Role</label>
-        </div>
-        <select class="custom-select" id="role" name="role[]">
+        <label for="username">Role</label>
+        <select class="users-role-select-multiple" name="role[]" multiple="multiple" style="width: 100%">
             @foreach ($roles as $role)
                 <option value="{{ $role->id }}">{{ $role->role_name }}</option>
             @endforeach
-        </select>
+        </select>        
     </div>
 
     <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text" for="campus">Campus</label>
-        </div>
-        <select class="custom-select" id="campus" name="campus">
+        <label for="username">Campus</label>
+
+        <select class="custom-select" name="campus" style="width: 100%">
             @foreach ($campuses as $campus)
                 <option value="{{ $campus->id }}">{{ $campus->location }}</option>
             @endforeach
@@ -162,4 +166,5 @@
         </div>
 
     </div>
+
 @endsection

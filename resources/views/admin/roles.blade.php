@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <h4>Manage Roles</h4>
+
     @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -21,6 +21,13 @@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
+            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Roles</h6>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                    <i class="fas fa-download fa-sm text-white-50"></i> 
+                    Generate Report
+                    </a>
+            </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
@@ -28,6 +35,7 @@
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fas fa-plus fa-sm text-white-50 mr-1"></i> 
                             Add New
                         </button>
 {{-- ADD A USER FORM --}}

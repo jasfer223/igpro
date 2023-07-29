@@ -15,9 +15,6 @@ return new class extends Migration
             $table -> id();
             $table -> string('username');
             $table -> string('email')->unique();
-            $table -> foreignId('campus_id')
-                ->contrained('campuses')
-                ->onDelete('cascade'); 
             $table -> string('password');
             $table -> timestamps();
         });

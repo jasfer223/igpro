@@ -6,7 +6,13 @@
 
 @section('content')
 <div class="container-fluid">
-    <h4>Manage Projects</h4>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Manage Users</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-download fa-sm text-white-50"></i> 
+            Generate Report
+        </a>
+    </div>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -96,53 +102,59 @@
                     </tfoot>
                     <tbody>
 
-                        @foreach ($projects as $project)
-                            @foreach ($project->campuses as $campus)
-                                @if ($campus->id === auth()->user()->campus_id)
-                                    <tr>
-                                        <td>{{ $project->title }}</td>
-                                        <td>{{ $project->description }}</td>
-
-                                        @php
-                                            // Define a mapping array to associate statuses with Bootstrap badge classes
-                                            $statusBadgeClasses = [
-                                                'Functional' => 'success',
-                                                'Phased Out' => 'warning',
-                                            ];
-                                            // Look up the badge class based on the status using the mapping array
-                                            $badgeClass = $statusBadgeClasses[$campus->pivot->status] ?? 'warning';
-                                        @endphp
-                                        <td>
-                                            <span class="badge badge-{{ $badgeClass }}">{{ $campus->pivot->status }}</span>
-                                        </td>
-
-                                        @php
-                                            // Define a mapping array to associate locations with Bootstrap badge classes
-                                            $locationBadgeClasses = [
-                                                'Tandag' => 'primary',
-                                                'Bislig' => 'secondary',
-                                                'Cantilan' => 'success',
-                                                'San Miguel' => 'danger',
-                                                'Tagbina' => 'warning',
-                                                'Lianga' => 'info',
-                                                'Cagwait' => 'dark',
-                                            ];
-                                            // Look up the badge class based on the location using the mapping array
-                                            $badgeClass = $locationBadgeClasses[$campus->location] ?? 'primary';
-                                        @endphp
-                                        <td>
-                                            <span class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span>
-                                        </td>
-
-                                        <td class="col-2">
-                                            <button class="btn btn-primary btn-sm" type="button">View</button>
-                                            <button class="btn btn-primary btn-sm" type="button">Edit</button>
-                                            <button class="btn btn-warning btn-sm" type="button">Delete</button>
-                                        </td>
-                                    </tr>
+                       @foreach ($campusProjects as $project)
+                            <tr>
+                                <td>{{ $project->title }}</td>
+                                <td>{{ $project->description }}</td>
+                                
+                                @if ($project->campuses->contains('location', Auth::user()->campus->location))
+                                    <td> 
+                                        @foreach ($project->statuses as $status)
+                                            
+                                                <div>  
+                                                    @php
+                                                        $statusBadgeClasses = [
+                                                            'Functional' => 'success',
+                                                            'Phased Out' => 'danger',
+                                                        ];
+                                                        $badgeClass = $statusBadgeClasses[$status->status_name] ?? 'success';
+                                                    @endphp
+                                                    <span class="badge badge-{{ $badgeClass }}">{{ $status->status_name }}</span>
+                                                </div>
+                                        @break 
+                                        @endforeach   
+                                    </td>
                                 @endif
-                            @endforeach
+
+
+                                <td>
+                                    @foreach ($project->campuses as $campus)
+                                        <div>
+                                            @php
+                                                $locationBadgeClasses = [
+                                                    'Tandag' => 'primary',
+                                                    'Cantilan' => 'success',
+                                                    'Cagwait' => 'dark',
+                                                    'Lianga' => 'info',
+                                                    'Tagbina' => 'warning',
+                                                    'San Miguel' => 'danger',
+                                                    'Bislig' => 'secondary',
+                                                    ];
+                                                $badgeClass = $locationBadgeClasses[$campus->location] ?? 'primary';
+                                            @endphp
+                                            <span class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span>
+                                        </div>
+                                    @endforeach
+                                </td>
+
+                                <td class="col-2">
+                                    <button class="btn btn-success btn-sm" type="button">View</button>
+                                    <button class="btn btn-primary btn-sm" type="button">Edit</button>
+                                    <button class="btn btn-warning btn-sm" type="button">Delete</button>
+                                </td>
+                            </tr>
                         @endforeach
+
 
                     </tbody>
                 </table>

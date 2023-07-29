@@ -6,7 +6,5 @@
 
 @section('content')
 <div class="container-fluid">
-	<h4>Dashboard</h4>
-	
 </div>
 @endsection

@@ -6,7 +6,6 @@
 
 @section('content')
 <div class="container-fluid">
-    <h4>Manage Projects</h4>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -20,18 +19,28 @@
         </div>
     @endif
 
-    {{-- DataTable Start --}}
+    {{-- .card START --}}
     <div class="card shadow mb-4">
+        <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-download fa-sm text-white-50"></i> 
+                Generate Report
+            </a>
+        </div>
+        {{-- .card-body START --}}
         <div class="card-body">
+            {{-- .row START --}}
             <div class="row">
                 <div class="col-sm-12 col-md-6">
 
-                    {{-- Add new button toggle modal --}}
+                    {{-- Add New button toggle modal --}}
                     <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fas fa-plus fa-sm text-white-50 mr-1"></i> 
                         Add New
                     </button>
 
-                    {{-- Add project form --}}
+                    {{-- form START --}}
                     <form method="POST" action="{{ route('create-project') }}" id="createProjectForm">
                         @csrf
                         
@@ -47,7 +56,7 @@
                                         </button>
                                     </div>
 
-                                    {{-- Project form modal BODY --}}
+                                    {{-- .modal-body START --}}
                                     <div class="modal-body">  
 
                                         <div class="mb-3">
@@ -55,25 +64,46 @@
                                             <input class="form-control" id="title" type="text" placeholder="Enter project title" name="title">
                                         </div>
 
+                                        {{-- CKEDITOR --}}
                                         <div class="mb-3">
                                             <label for="description">Description</label>
-                                            <input class="form-control" id="description" type="text" placeholder="Enter project description" name="description">
+                                            <textarea class="form-control" id="editor" type="text" placeholder="Enter project description" name="description"> </textarea>
                                         </div>   
+
+                                        <label for="status">Status</label>
+                                        <div class="input-group mb-3">
+                                            
+                                            <select class="custom-select" id="status" name="status">
+                                                    @foreach ($allStatus as $status)
+                                                        <option value="{{ $status->id }}">{{ $status->status_name }}</option>
+                                                    
+                                                    @endforeach
+                                            </select>
+                                        </div>
+                                        <label for="status">Location</label>
+                                        <div class="input-group mb-3">
+                                            <select class="custom-select" id="campus" name="campus">
+                                                    @foreach ($allCampus as $campus)
+                                                        <option value="{{ $campus->id }}">{{ $campus->location }}</option>
+                                                    
+                                                    @endforeach
+                                            </select>
+                                        </div>
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <input type="submit" class="btn btn-primary" value="Create project">
                                         </div>
 
-                                    </div>   {{-- Modal body END--}}
+                                    </div> {{-- .modal-body END--}}
                                 </div>
                             </div>
                         </div>
-                    </form> {{-- FORM END --}}
+                    </form> {{-- form END --}}
                 </div>        
-            </div> {{-- Row END --}}
+            </div> {{-- .row END --}}
 
-            {{-- Table responsive START  --}}
+            {{-- .table-responsive START  --}}
             <div class="table-responsive">
                 <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
                     <thead>
@@ -96,65 +126,75 @@
                     </tfoot>
                     <tbody>
 
-                        @foreach ($projects as $project)
+                        @foreach ($campusProjects as $project)
                             <tr>
                                 <td>{{ $project->title }}</td>
-                                <td>{{ $project->description }}</td>
-
-                                
                                 <td>
-                                @foreach ($project->campuses as $campus)
-                                @php
-                                    // Define a mapping array to associate statuses with Bootstrap badge classes
-                                    $statusBadgeClasses = [
-                                        'Functional' => 'success',
-                                        'Phased Out' => 'danger',
-                                    ];
-                                    // Look up the badge class based on the status using the mapping array
-                                    $badgeClass = $statusBadgeClasses[$campus->pivot->status] ?? 'danger';
-                                @endphp
-                                    <span class="badge badge-{{ $badgeClass }}">{{ $campus->pivot->status }} ({{ $campus->location }})</span>
-                                @endforeach
+                                    {{ $project->description }}
                                 </td>
-                                
-                                <td>
-                            
-                                @php
-                                    // Define a mapping array to associate locations with Bootstrap badge classes
-                                    $locationBadgeClasses = [
-                                        'Tandag' => 'primary',
-                                        'Bislig' => 'secondary',
-                                        'Cantilan' => 'success',
-                                        'San Miguel' => 'danger',
-                                        'Tagbina' => 'warning',
-                                        'Lianga' => 'info',
-                                        'Cagwait' => 'dark',
-                                    ];
-                                @endphp
+                                <td> 
+                                    @foreach ($project->statuses as $status)
+                                        <div>  
+                                            @php
+                                                // Define a mapping array to associate status names with Bootstrap badge classes
+                                                $statusBadgeClasses = [
+                                                    'Functional' => 'success',
+                                                    'Phased Out' => 'danger',
+                                                    // Add more status names and their corresponding badge classes here if needed
+                                                ];
+                                                // Look up the badge class based on the status name using the mapping array
+                                                $badgeClass = $statusBadgeClasses[$status->status_name] ?? 'primary';
+                                            @endphp
 
-                                @foreach ($project->campuses as $campus)
-                                    @php
-                                        // Look up the badge class based on the location using the mapping array
-                                        $badgeClass = $locationBadgeClasses[$campus->location] ?? 'primary';
-                                    @endphp
-                                    <span class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span>
-                                @endforeach
-                            
+                                            <span class="badge badge-{{ $badgeClass }}">{{ $status->status_name }}</span>
+                                        
+                                        </div>
+                                    @endforeach   
                                 </td>
+
+                                <td>
+                                    @foreach ($project->campuses as $campus)
+                                        <div>
+                                            @php
+                                                // Define a mapping array to associate status names with Bootstrap badge classes
+                                                $locationBadgeClasses = [
+                                                    'Tandag' => 'primary',
+                                                    'Cantilan' => 'success',
+                                                    'Cagwait' => 'dark',
+                                                    'Tagbina' => 'warning',
+                                                    'San Miguel' => 'danger',
+                                                    'Lianga' => 'info',
+                                                    'Bislig' => 'secondary',
+                                                    // Add more status names and their corresponding badge classes here if needed
+                                                ];
+                                                // Look up the badge class based on the status name using the mapping array
+                                                $badgeClass = $locationBadgeClasses[$campus->location] ?? 'primary';
+                                            @endphp
+                                            <span class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span>
+                                        </div>
+                                    @endforeach
+                                </td>
+
                                 <td class="col-2">
-                                    <button class="btn btn-primary btn-sm" type="button">View</button>
+                                    <button class="btn btn-success btn-sm" type="button">View</button>
                                     <button class="btn btn-primary btn-sm" type="button">Edit</button>
                                     <button class="btn btn-warning btn-sm" type="button">Delete</button>
                                 </td>
                             </tr>
                         @endforeach
-
-
-
+                       
                     </tbody>
                 </table>
             </div> {{-- Table responsive END --}}
-        </div>
-    </div>
-</div>
+        </div> {{-- .card-body END --}}
+    </div>  {{-- .card END --}}
+</div> {{-- .container-fluid END --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 @endsection

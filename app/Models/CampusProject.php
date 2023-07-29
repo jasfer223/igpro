@@ -9,7 +9,7 @@ class CampusProject extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['project_id','campus_id','status'];
+    protected $fillable = ['project_id','campus_id','status_id'];
 
     // ONE TO MANY
     // Get the campus that relate to the user
@@ -17,7 +17,4 @@ class CampusProject extends Model
         return $this->belongsTo(AccomplishmentReport::class);
     }
 
-    public function statuses(){
-        return $this->belongsTo(Status::class);
-    }
 }

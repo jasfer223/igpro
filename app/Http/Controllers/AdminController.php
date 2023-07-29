@@ -10,6 +10,8 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Campus;
 use App\Models\Project;
+use App\Models\Status;
+use App\Models\CampusProject;
 
 class AdminController extends Controller
 {
@@ -157,8 +159,54 @@ class AdminController extends Controller
 
     }
 
-    public function showProjects(){
-        $projects = Project::all(); // Query all role value
-        return view('admin.projects', compact('projects'));
-    }
+        public function showProjects() {
+            // Fetch all projects with their related campuses and statuses
+            $allStatus = Status::all();
+            $campusProjects = Project::with('campuses', 'statuses')->get();
+            $allCampus = Campus::all();
+
+            return view('admin.projects', compact('campusProjects', 'allStatus', 'allCampus'));
+        }
+
+        public function createProject(Request $request) {
+            // dd($request);    
+
+            $request->validate([
+                'title' => 'required',
+                'description' => 'required',
+                'status' => 'required',
+                'campus' => 'required',
+            ]);
+
+
+            // Create the project
+            $project = Project::create([
+                    'title' => $request->input('title'),
+                    'description' => $request->input('description'),
+                    'user_id' => Auth::user()->id,
+                
+            ]);
+
+
+
+            // Get the selected campus ID and status ID from the request
+            $campusId = $request->input('campus');
+            $statusId = $request->input('status');
+
+            // Associate the project with the selected campus and status in the pivot table
+            $project->campuses()->attach($campusId, ['status_id' => $statusId, 'project_id' => $project->id]);
+
+            if ($project) {
+                // Set a flash message to indicate success
+                session()->flash('success', 'Project created successfully!');
+            } else {
+                // Set a flash message to indicate error
+                session()->flash('error', 'Error creating project.');
+            }
+
+            return redirect()->route('admin.projects');
+        }
+
+
+
 }

@@ -6,7 +6,6 @@
 
 @section('content')
 <div class="container-fluid">
-    <h4>Manage Campuses</h4>
 
     @if(session('success'))
             <div class="alert alert-success">
@@ -22,6 +21,13 @@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
+            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Campuses</h6>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-download fa-sm text-white-50"></i> 
+                Generate Report
+            </a>
+            </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
@@ -29,6 +35,7 @@
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fas fa-plus fa-sm text-white-50 mr-1"></i> 
                             Add New
                         </button>
 {{-- ADD A USER FORM --}}
@@ -89,7 +96,27 @@
                             @foreach ($campuses as $campus)
                                 <tr>
                                     <td>{{ $campus->id }}</td>
-                                    <td>{{ $campus->location }}</td>
+                                    <td>
+
+                                        @php
+                                            // Define a mapping array to associate status names with Bootstrap badge classes
+                                            $locationBadgeClasses = [
+                                                'Tandag' => 'primary',
+                                                'Cantilan' => 'success',
+                                                'Cagwait' => 'dark',
+                                                'Lianga' => 'info',
+                                                'Tagbina' => 'warning',
+                                                'San Miguel' => 'danger',
+                                                'Bislig' => 'secondary',
+                                                // Add more status names and their corresponding badge classes here if needed
+                                            ];
+                                            // Look up the badge class based on the status name using the mapping array
+                                            $badgeClass = $locationBadgeClasses[$campus->location] ?? 'primary';
+                                        @endphp
+                                            <span class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span>
+                                        
+
+                                    </td>
                                     <td class="col-2">
                                         <button class="btn btn-primary btn-sm" type="button">Edit</button>
                                         <button class="btn btn-warning btn-sm" type="button">Delete</button>

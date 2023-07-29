@@ -19,6 +19,7 @@ class UserController extends Controller
         if(Auth::check()){
             return redirect()->route('user.dashboard');
         }
+                
         return view('login');
     }
 
@@ -26,11 +27,25 @@ class UserController extends Controller
         return view('user.dashboard');
     }
 
-    public function showProjects(){
-        $projects = Project::all(); // Query all role value
-        return view('user.projects', compact('projects'));
+    public function showProjects() {
+        // Get the authenticated user's campus location
+        $userLocation = Auth::user()->campus->location;
+
+        // Fetch only the campusProjects that belong to the user's campus location
+        $campusProjects = Project::whereHas('campuses', function ($query) use ($userLocation) {
+            $query->where('location', $userLocation);
+        })
+        ->with(['campuses' => function ($query) use ($userLocation) {
+            $query->where('location', $userLocation);
+        }])
+        ->get();
+
+        // return $campusProjects;
+        // Extract the filtered statuses from the campusProjects
+        $filteredStatuses = $campusProjects->pluck('statuses')->flatten();
+        //return $filteredStatuses;
+        return view('user.projects', compact('campusProjects', 'filteredStatuses'));
     }
-    
 
     public function authenticate(Request $request)
     {
