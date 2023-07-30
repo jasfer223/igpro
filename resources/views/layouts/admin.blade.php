@@ -13,7 +13,7 @@
 
     {{-- ICON --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.png') }}">
-    
+
     <title>@yield('title')</title>
 
     <!-- Custom fonts for this template-->
@@ -31,10 +31,12 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     {{-- SELECT TO BS5 THEME --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <!-- Or for RTL support -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
-    
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+
 </head>
 
 <body id="page-top">
@@ -48,7 +50,8 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('login') }}">
                 <div class="sidebar-brand-icon">
-                    <img src="{{ asset('images/nemsu_igpro_logo.png') }}" width="40" height="40" alt="IGPro logo">
+                    <img src="{{ asset('images/nemsu_igpro_logo.png') }}" width="40" height="40"
+                        alt="IGPro logo">
                 </div>
                 <div class="sidebar-brand-text mx-3">IGPro <sup></sup></div>
             </a>
@@ -171,22 +174,24 @@
                         </li>
 
 
-                        <div class="row">              
+                        <div class="row">
                             <div class="col-sm-5">
-                              <button type="button" class="btn btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                <div class="handle"></div>
-                              </button>
+                                <button type="button" class="btn btn-toggle" data-toggle="button"
+                                    aria-pressed="false" autocomplete="off">
+                                    <div class="handle"></div>
+                                </button>
                             </div>
 
                             <div class="col-sm-5">
-                              <button type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off">
-                                <div class="handle"></div>
-                              </button>
+                                <button type="button" class="btn btn-toggle active" data-toggle="button"
+                                    aria-pressed="true" autocomplete="off">
+                                    <div class="handle"></div>
+                                </button>
                             </div>
 
-                          </div>
+                        </div>
 
-{{--                           <div class="nav-item">
+                        {{--                           <div class="nav-item">
                             <div class="nav-link">
 
                                 <div class="switch">
@@ -213,7 +218,6 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <i class="fas fa-user-secret pr-1"></i>
@@ -230,7 +234,7 @@
                                 </a>
 
                                 <div class="dropdown-divider"></div>
-              
+
                                 {{-- <form method="POST" action="{{ route('logout') }}" id="logoutForm">
                                     @csrf
                                     <button type="submit" class="dropdown-item">
@@ -239,8 +243,8 @@
                                     </button>
                                 </form> --}}
 
-                                  <a class="dropdown-item" href="" data-toggle="modal"
-                                    data-target="#logoutModal" >
+                                <a class="dropdown-item" href="" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -327,10 +331,10 @@
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-{{--     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
+    {{--     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script> --}}
 
-{{-- 
+    {{-- 
     <script>
   window.userDashboardUrl = "{{ route('user.dashboard') }}";
   window.adminDashboardUrl = "{{ route('admin.dashboard') }}";
@@ -348,9 +352,9 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     {{-- THEME --}}
     <!-- Scripts -->
-    <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-    <script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script  src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
 </body>
 
 </html>

@@ -26,7 +26,7 @@
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 
-    {{-- USER MODE BUTTON STYLE--}}
+    {{-- USER MODE BUTTON STYLE --}}
     {{-- <link rel="stylesheet" href="{{ asset('css/admin/user-mode-btn.css') }}"> --}}
 
     {{-- FOR DATATABLE --}}
@@ -47,7 +47,8 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('login') }}">
                 <div class="sidebar-brand-icon">
-                    <img src="{{ asset('images/nemsu_igpro_logo.png') }}" width="40" height="40" alt="IGPro logo">
+                    <img src="{{ asset('images/nemsu_igpro_logo.png') }}" width="40" height="40"
+                        alt="IGPro logo">
                 </div>
                 <div class="sidebar-brand-text mx-3">IGPro <sup></sup></div>
             </a>
@@ -79,7 +80,7 @@
             </li>
 
             <!-- Nav Item - Campus Collapse Menu -->
- {{--            <li class="nav-item">
+            {{--            <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.campuses') }}">
                     <i class="fas fa-fw fa-school"></i>
                     <span>Accomplishment Report</span>
@@ -164,7 +165,7 @@
                         {{-- ADMIN MODE --}}
 
 
-                      {{--   @if (auth()->user()->hasAnyRole('Admin'))
+                        {{--   @if (auth()->user()->hasAnyRole('Admin'))
                         <div class="nav-item">
                             <div class="nav-link">
                                 <!-- Toggle switch for User Mode and Admin Mode -->
@@ -212,7 +213,7 @@
                                 </a>
 
                                 <div class="dropdown-divider"></div>
-              
+
                                 {{-- <form method="POST" action="{{ route('logout') }}" id="logoutForm">
                                     @csrf
                                     <button type="submit" class="dropdown-item">
@@ -221,8 +222,8 @@
                                     </button>
                                 </form> --}}
 
-                                  <a class="dropdown-item" href="" data-toggle="modal"
-                                    data-target="#logoutModal" >
+                                <a class="dropdown-item" href="" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -311,7 +312,7 @@
     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
 
-{{-- 
+    {{-- 
     <script>
   window.userDashboardUrl = "{{ route('user.dashboard') }}";
   window.adminDashboardUrl = "{{ route('admin.dashboard') }}";

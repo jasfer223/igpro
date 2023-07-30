@@ -39,29 +39,27 @@ class User extends Authenticatable
     ];
 
     //  MANY TO MANY
-    public function roles(){
+    public function roles()
+    {
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
     }
-
     // ONE TO MANY
     // Get the campus that relate to the user
-    public function campus(){
+    public function campus()
+    {
         return $this->belongsTo(Campus::class);
     }
-
     // MANY TO ONE
     // Get the USERS PROJECTS
-    public function projects(){
+    public function projects()
+    {
         return $this->hasMany(Project::class);
     }
-
-
     public function isAdmin()
     {
         // Check if the user has the 'Admin' role
         return $this->roles()->where('role_name', 'Admin')->exists();
     }
-
     public function hasAnyRole(...$roles)
     {
         // Check if the user has the any of the role

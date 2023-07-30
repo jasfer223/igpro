@@ -5,15 +5,15 @@
 @section('title', 'NEMSU | IGPro')
 
 @section('content')
-<div class="container-fluid">
+    <div class="container-fluid">
 
-    @if(session('success'))
+        @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
 
-        @if(session('error'))
+        @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
@@ -22,11 +22,11 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Campuses</h6>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> 
-                Generate Report
-            </a>
+                <h6 class="m-0 font-weight-bold text-primary">Campuses</h6>
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                    <i class="fas fa-download fa-sm text-white-50"></i>
+                    Generate Report
+                </a>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -35,42 +35,44 @@
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fas fa-plus fa-sm text-white-50 mr-1"></i> 
+                            <i class="fas fa-plus fa-sm text-white-50 mr-1"></i>
                             Add New
                         </button>
-{{-- ADD A USER FORM --}}
-<form method="POST" action="{{ route('create-campus') }}">
-      @csrf
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Create a user account</h5>
+                        {{-- ADD A USER FORM --}}
+                        <form method="POST" action="{{ route('create-campus') }}">
+                            @csrf
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Create a user account</h5>
 
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
 
-    <div class="mb-3">
-        <label for="location">Location</label>
-        <input class="form-control" id="location" type="text" placeholder="Enter campus location" name="location">
-    </div>
+                                            <div class="mb-3">
+                                                <label for="location">Location</label>
+                                                <input class="form-control" id="location" type="text"
+                                                    placeholder="Enter campus location" name="location">
+                                            </div>
 
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <input type="submit" class="btn btn-primary" value="Create campus">
-        {{-- <button type="submit" class="btn btn-primary">Save changes</button> --}}
-    </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <input type="submit" class="btn btn-primary" value="Create campus">
+                                                {{-- <button type="submit" class="btn btn-primary">Save changes</button> --}}
+                                            </div>
 
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </form>
                     </div>
                 </div>
@@ -113,8 +115,8 @@
                                             // Look up the badge class based on the status name using the mapping array
                                             $badgeClass = $locationBadgeClasses[$campus->location] ?? 'primary';
                                         @endphp
-                                            <span class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span>
-                                        
+                                        <span class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span>
+
 
                                     </td>
                                     <td class="col-2">
@@ -128,9 +130,9 @@
 
                         </tbody>
                     </table>
-             
+
                 </div>
             </div>
         </div>
-</div>
+    </div>
 @endsection

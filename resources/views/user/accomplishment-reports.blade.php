@@ -5,9 +5,9 @@
 @section('title', 'NEMSU | IGPro')
 
 @section('content')
-<div class="container-fluid">
-    <h4>Accomplishment Reports</h4>
+    <div class="container-fluid">
+        <h4>Accomplishment Reports</h4>
 
-    
-</div>
+
+    </div>
 @endsection

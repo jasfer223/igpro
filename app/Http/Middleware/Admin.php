@@ -16,12 +16,10 @@ class Admin
     public function handle(Request $request, Closure $next): Response
     {
         // IF not logged in and not logged in as admin
-        if(!auth()->check() || !auth()->user()->isAdmin()) {
+        if (!auth()->check() || !auth()->user()->isAdmin()) {
             return abort(403);
-        } 
+        }
 
         return $next($request);
-
-
     }
 }

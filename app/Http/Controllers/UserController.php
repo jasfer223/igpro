@@ -15,19 +15,22 @@ use App\Models\Project;
 class UserController extends Controller
 {
 
-    public function showLogin(){
-        if(Auth::check()){
+    public function showLogin()
+    {
+        if (Auth::check()) {
             return redirect()->route('user.dashboard');
         }
-                
+
         return view('login');
     }
 
-    public function showDashboard(){
+    public function showDashboard()
+    {
         return view('user.dashboard');
     }
 
-    public function showProjects() {
+    public function showProjects()
+    {
         // Get the authenticated user's campus location
         $userLocation = Auth::user()->campus->location;
 
@@ -35,10 +38,10 @@ class UserController extends Controller
         $campusProjects = Project::whereHas('campuses', function ($query) use ($userLocation) {
             $query->where('location', $userLocation);
         })
-        ->with(['campuses' => function ($query) use ($userLocation) {
-            $query->where('location', $userLocation);
-        }])
-        ->get();
+            ->with(['campuses' => function ($query) use ($userLocation) {
+                $query->where('location', $userLocation);
+            }])
+            ->get();
 
         // return $campusProjects;
         // Extract the filtered statuses from the campusProjects
@@ -53,13 +56,11 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-       
+
         $credentials = $request->only('email', 'password');
 
-        if(Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            //query for all user
-
             if ($user->isAdmin()) {
                 return redirect()->route('admin.dashboard');
             } else {
@@ -70,9 +71,9 @@ class UserController extends Controller
         return redirect()->route('login')->withErrors(['message' => 'Invalid login credentials.']);
     }
 
-    public function userLogout(){
+    public function userLogout()
+    {
         Auth::logout();
         return redirect()->route('login');
     }
-
 }

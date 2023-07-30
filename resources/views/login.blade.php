@@ -53,16 +53,29 @@
                                     </div>
                                     <form class="user" action="{{ route('auth') }}" method="POST">
                                         @csrf
-                                        <span class="text-xs text-danger">@error('message') {{$message}} @enderror</span>
+                                        <span class="text-xs text-danger">
+                                            @error('message')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email">
-                                        <span class="text-xs text-danger pl-3">@error('email') {{$message}} @enderror</span>
+                                            <span class="text-xs text-danger pl-3">
+                                                @error('email')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
-                                            <span class="text-xs text-danger pl-3">@error('password') {{$message}} @enderror</span>
+                                            <input type="password" name="password"
+                                                class="form-control form-control-user" id="exampleInputPassword"
+                                                placeholder="Password">
+                                            <span class="text-xs text-danger pl-3">
+                                                @error('password')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
