@@ -3,18 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class CampusProject extends Model
+class CampusProject extends Pivot
 {
     use HasFactory;
 
-    protected $fillable = ['project_id','campus_id','status_id'];
+    protected $table = 'campus_project';
 
-    // ONE TO MANY
-    // Get the campus that relate to the user
-    public function accomplishmentReport(){
-        return $this->belongsTo(AccomplishmentReport::class);
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
-
 }

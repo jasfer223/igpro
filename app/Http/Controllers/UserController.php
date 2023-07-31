@@ -2,21 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Project;
-
-
+use App\Models\Status;
 
 class UserController extends Controller
 {
 
     public function showLogin()
     {
+        // $campus = [
+        //     'location' => 'Tandag',
+        // ];
+        // Campus::create($campus);
+        
+        // $user = [
+        //     'username' => 'igpro',
+        //     'email' => 'igpro@nemsu.edu.ph',
+        //     'password' => '12345678',
+        //     'campus_id' => 1,
+        // ];
+        // User::create($user);
+
+        // $role = [
+        //     'role_name' => 'Admin',
+        // ];
+        // Role::create($role);
+
+        // $user = User::find(1);
+        // $role = Role::find(1);
+        // $user->roles()->attach($role);
+
+        // $status = [
+        //     'status_name' => 'Phased Out',
+        // ];
+        // Status::create($status);
+
         if (Auth::check()) {
             return redirect()->route('user.dashboard');
         }
