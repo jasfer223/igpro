@@ -71,7 +71,7 @@
                                                 <textarea class="form-control" id="editor" type="text" placeholder="Enter project description" name="description"> </textarea>
                                             </div>
 
-                                            <label for="status">Status</label>
+                                            {{-- <label for="status">Status</label>
                                             <div class="input-group mb-3">
 
                                                 <select class="custom-select" id="status" name="status">
@@ -80,12 +80,15 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                            </div>
-                                            <label for="status">Location</label>
-                                            <div class="input-group mb-3">
-                                                <select class="custom-select" id="campus" name="campus">
-                                                    @foreach ($allCampus as $campus)
-                                                        <option value="{{ $campus->id }}">{{ $campus->location }}</option>
+                                            </div> --}}
+
+                                            <label for="status">Campus Location and Status</label>
+                                            <div class="mb-3">
+                                                <select name="" id="">
+                                                    <option value="">Select Status</option>
+                                                    @foreach ($campuses as $campus)
+                                                        <option value="{{ $campus->id }}">{{ $status->name }} -
+                                                            {{ $campus->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -127,31 +130,32 @@
                         </tfoot>
                         <tbody>
 
-                            @foreach ($campusProjects as $project)
+                            @foreach ($projects as $project)
                                 <tr>
                                     <td>{{ $project->title }}</td>
                                     <td>
                                         {{ $project->description }}
                                     </td>
                                     <td>
-                                        @foreach ($project->statuses as $status)
-                                            <div>
-                                                @php
-                                                    // Define a mapping array to associate status names with Bootstrap badge classes
-                                                    $statusBadgeClasses = [
-                                                        'Functional' => 'success',
-                                                        'Phased Out' => 'danger',
-                                                        // Add more status names and their corresponding badge classes here if needed
-                                                    ];
-                                                    // Look up the badge class based on the status name using the mapping array
-                                                    $badgeClass = $statusBadgeClasses[$status->status_name] ?? 'primary';
-                                                @endphp
+                                        <div>
 
-                                                <span
-                                                    class="badge badge-{{ $badgeClass }}">{{ $status->status_name }}</span>
+                                            @php
+                                                $statusBadgeClasses = [
+                                                    'Functional' => 'success',
+                                                    'Phased Out' => 'danger',
+                                                ];
+                                                
+                                                $badgeClass = $statusBadgeClasses[$project->status->status_name] ?? 'primary';
+                                            @endphp
 
-                                            </div>
-                                        @endforeach
+                                            <span class="badge badge-{{ $badgeClass }}">
+                                                {{ $project->status->status_name }}
+                                            </span>
+
+
+
+                                        </div>
+
                                     </td>
 
                                     <td>

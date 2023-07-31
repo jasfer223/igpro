@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Status extends Model
 {
@@ -11,17 +12,9 @@ class Status extends Model
 
     protected $fillable = ['status_name'];
 
-
-    public function projects()
+    public function projects(): HasMany
     {
-        return $this->belongsToMany(Project::class, 'campus_project', 'status_id', 'project_id')
-            ->withPivot('campus_id');
+        return $this->hasMany(Project::class);
     }
-
-    public function campuses() {
-        return $this->belongsToMany(Campus::class, 'campus_project', 'status_id', 'campus_id')
-            ->withPivot('project_id');
-    }
-
 
 }

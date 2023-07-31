@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->foreignId('user_id')
-                ->constrained('users') 
-                ->onDelete('cascade');
-        });                 
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('campus_id')
+                  ->constrained('campuses')
+                  ->onDelete('cascade');
+        });
     }
 
     /**
@@ -23,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };
