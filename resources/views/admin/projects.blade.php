@@ -69,28 +69,26 @@
                                             <div class="mb-3">
                                                 <label for="description">Description</label>
                                                 <textarea class="form-control" id="editor" type="text" placeholder="Enter project description" name="description"> </textarea>
-                                            </div>
-
-                                            {{-- <label for="status">Status</label>
-                                            <div class="input-group mb-3">
-
-                                                <select class="custom-select" id="status" name="status">
-                                                    @foreach ($allStatus as $status)
-                                                        <option value="{{ $status->id }}">{{ $status->status_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div> --}}
-
-                                            <label for="status">Campus Location and Status</label>
+                                            </div>                                      
+                                            
                                             <div class="mb-3">
-                                                <select name="" id="">
-                                                    <option value="">Select Status</option>
+                                                <label>Select Campuses and Status</label>
+                                                <div class="row">
                                                     @foreach ($campuses as $campus)
-                                                        <option value="{{ $campus->id }}">{{ $status->name }} -
-                                                            {{ $campus->name }}</option>
+                                                        <div class="col-6">
+                                                            <input type="checkbox" name="campuses[]" value="{{ $campus->id }}">
+                                                            {{ $campus->location }}
+                                                        </div>
+                                                        <div class="col-6 d-flex justify-content-center align-items-center">
+                                                            <label class="mr-1" for="status_{{ $campus->id }}">Status:</label>
+                                                            <select name="status_{{ $campus->id }}" id="status_{{ $campus->id }}" required>
+                                                                @foreach ($statuses as $status)
+                                                                    <option value="{{ $status->id }}">{{ $status->status_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     @endforeach
-                                                </select>
+                                                </div>
                                             </div>
 
                                             <div class="modal-footer">
@@ -130,6 +128,14 @@
                         </tfoot>
                         <tbody>
 
+                            @php
+                                // Define an associative array to map status_id to status_name
+                                $statusNames = [
+                                    1 => 'Functional', // Assuming 1 is the status_id for 'Functional'
+                                    2 => 'Phased Out', // Assuming 2 is the status_id for 'Phased Out'
+                                    // Add more status_id to status_name mappings as needed
+                                ];
+                            @endphp
                             @foreach ($projects as $project)
                                 <tr>
                                     <td>{{ $project->title }}</td>
@@ -137,24 +143,19 @@
                                         {{ $project->description }}
                                     </td>
                                     <td>
-                                        <div>
-
-                                            @php
-                                                $statusBadgeClasses = [
-                                                    'Functional' => 'success',
-                                                    'Phased Out' => 'danger',
-                                                ];
-                                                
-                                                $badgeClass = $statusBadgeClasses[$project->status->status_name] ?? 'primary';
-                                            @endphp
-
-                                            <span class="badge badge-{{ $badgeClass }}">
-                                                {{ $project->status->status_name }}
-                                            </span>
-
-
-
-                                        </div>
+                                        @foreach ($project->campuses as $campus)
+                                            <div>    
+                                                @php
+                                                    // Retrieve the status_id for the current campus using the pivot table
+                                                    $status_id = $campus->pivot->status_id;
+                                                    // Determine the status_name based on the status_id using the associative array
+                                                    $statusName = $statusNames[$status_id] ?? 'Unknown';
+                                                    // Determine the badge class based on the status_id
+                                                    $badgeClass = $status_id === 1 ? 'success' : 'danger'; // You can add more conditions as needed
+                                                @endphp
+                                                <span class="badge badge-{{ $badgeClass }}">{{ $statusName }}</span>
+                                            </div>
+                                        @endforeach
 
                                     </td>
 
@@ -171,9 +172,9 @@
                                                         'San Miguel' => 'danger',
                                                         'Lianga' => 'info',
                                                         'Bislig' => 'secondary',
-                                                        // Add more status names and their corresponding badge classes here if needed
+                                                        
                                                     ];
-                                                    // Look up the badge class based on the status name using the mapping array
+                                                    
                                                     $badgeClass = $locationBadgeClasses[$campus->location] ?? 'primary';
                                                 @endphp
                                                 <span

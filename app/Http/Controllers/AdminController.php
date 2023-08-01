@@ -173,33 +173,50 @@ class AdminController extends Controller
     }
 
     public function createProject(Request $request)
-    {
-        // dd($request);    
+    {    
 
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'status' => 'required',
-            'campus' => 'required',
+            'campuses' => 'required|array|min:1', // Check that at least one campus is selected
+            'campuses.*' => 'exists:campuses,id', // Check that the selected campus IDs exist in the 'campuses' table
+            // Add validation rules for the status dropdowns
+            // We use "status_{campus_id}" as the input name format for the status dropdowns
+            // For each selected campus, the corresponding status dropdown should be required and must exist in the 'statuses' table
+            'status_*' => 'required|exists:statuses,id',
         ]);
 
-        $data = [
+        // Create the project
+        $projectData = [
             'title' => $request->input('title'),
             'description' => $request->input('description'),
-            'status_id' => $request->input('status'),
         ];
 
-        // Create the project
-        $project = Auth::user()->projects()->create($data);
+        // Save the project data to the 'projects' table
+        $project = Auth::user()->projects()->create($projectData);
 
+        // Prepare an array to associate campuses and their statuses with the project
+        $campusStatusData = [];
 
-        // Get the selected campus ID from the request
-        $campus_id = $request->input('campus');
+        // Get the selected campus IDs from the request
+        $selectedCampusIds = $request->input('campuses');
 
+        // Loop through the selected campuses and associate their corresponding statuses with the project
+        foreach ($selectedCampusIds as $campusId) {
+            $statusId = $request->input('status_' . $campusId);
 
-        // Associate the project with the selected campus and status in the pivot table
-        $project->campuses()->attach($campus_id);
+            // Validate that the selected status is valid
+            // You may want to add additional validation here if needed
+            $statusExists = Status::where('id', $statusId)->exists();
 
+            if ($statusExists) {
+                // Add the campus ID and status ID to the array
+                $campusStatusData[$campusId] = ['status_id' => $statusId];
+            }
+        }
+
+        // Save the campus-status associations to the 'campus_project' table
+        $project->campuses()->attach($campusStatusData);
         if ($project) {
             // Set a flash message to indicate success
             session()->flash('success', 'Project created successfully!');

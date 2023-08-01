@@ -171,22 +171,22 @@
                                 <i class="fas fa-circle text-success"></i> Cantilan
                             </span>
                             <span class="mr-2">
-                                <i class="fas fa-circle text-info"></i> Lianga
+                                <i class="fas fa-circle text-danger"></i> Lianga
                             </span>
 
                             <span class="mr-2">
-                                <i class="fas fa-circle text-warning"></i> Tagbina
+                                <i class="fas fa-circle text-info"></i> Tagbina
                             </span>
 
                             <span class="mr-2">
                                 <i class="fas fa-circle" style="color: #d63384;"></i> Cagwait
                             </span>
                             <span class="mr-2">
-                                <i class="fas fa-circle text-danger"></i> San Miguel
+                                <i class="fas fa-circle text-secondary"></i> San Miguel
                             </span>
 
                             <span class="mr-2">
-                                <i class="fas fa-circle text-secondary"></i> Bislig
+                                <i class="fas fa-circle text-warning"></i> Bislig
                             </span>
                         </div>
                     </div>

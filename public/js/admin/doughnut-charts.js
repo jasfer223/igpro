@@ -11,6 +11,12 @@ function createDoughnutChart(data, ctx) {
             labels: campusLabels,
             datasets: [{
                 data: chartData,
+                // #4e73df - tandag - primary
+                // #1cc88a - cantilan - success
+                // #d63384 - cagwait - pink
+                // #36b9cc - lianga - info
+                // #f6c23e - tagbina - warning
+                // #858796 - bislig - secondary
                 backgroundColor: ['#4e73df', '#1cc88a', '#d63384', '#36b9cc', '#f6c23e', '#e74a3b', '#858796'], // Custom colors for each segment
                 borderWidth: 0,
             }]
