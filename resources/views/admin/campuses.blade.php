@@ -78,50 +78,56 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="campusTable" width="100%" cellspacing="0">
-                        <thead>
+                        <thead class="bg-primary text-gray-100">
                             <tr>
 
                                 <th>ID</th>
                                 <th>Location</th>
-                                <th class="col-2">Action</th>
+                                <th style="width:  50px;">Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>ID</th>
                                 <th>Location</th>
-                                <th class="col-2">Action</th>
+                                <th style="width:  50px;">Action</th>
                             </tr>
                         </tfoot>
-                        <tbody>
+                        <tbody class="text-gray-800">
 
                             @foreach ($campuses as $campus)
                                 <tr>
                                     <td>{{ $campus->id }}</td>
                                     <td>
 
-                                        @php
+                                        {{-- @php
                                             // Define a mapping array to associate status names with Bootstrap badge classes
                                             $locationBadgeClasses = [
                                                 'Tandag' => 'primary',
                                                 'Cantilan' => 'success',
-                                                'Cagwait' => 'dark',
-                                                'Lianga' => 'info',
-                                                'Tagbina' => 'warning',
-                                                'San Miguel' => 'danger',
-                                                'Bislig' => 'secondary',
+                                                'Cagwait' => 'cagwait',
+                                                'Lianga' => 'danger',
+                                                'Tagbina' => 'info',
+                                                'San Miguel' => 'secondary',
+                                                'Bislig' => 'warning',
                                                 // Add more status names and their corresponding badge classes here if needed
                                             ];
                                             // Look up the badge class based on the status name using the mapping array
                                             $badgeClass = $locationBadgeClasses[$campus->location] ?? 'primary';
                                         @endphp
-                                        <span class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span>
+                                        <span class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span> --}}
+
+                                        <span>{{ $campus->location }}</span>
 
 
                                     </td>
-                                    <td class="col-2">
-                                        <button class="btn btn-primary btn-sm" type="button">Edit</button>
-                                        <button class="btn btn-warning btn-sm" type="button">Delete</button>
+                                    <td style="width:  50px;">
+                                            <button class="btn-circle btn btn-primary btn-sm" type="button">
+                                                <i class="fas fa-edit "></i>
+                                            </button>
+                                            <button class="btn-circle btn btn-danger btn-sm" type="button">
+                                                    <i class="fas fa-trash" > </i>
+                                            </button>
                                     </td>
                                 </tr>
                             @endforeach

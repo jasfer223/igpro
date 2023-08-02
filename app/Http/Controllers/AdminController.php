@@ -27,16 +27,31 @@ class AdminController extends Controller
         // Get the count of projects in each campus
         $campuses = Campus::all();
         $campusData = [];
+        $campusStatusData = [];
         foreach ($campuses as $campus) {
             $projectCount = Project::whereHas('campuses', function ($query) use ($campus) {
                 $query->where('campus_id', $campus->id);
             })->count();
 
+            // Get count of functional status on each campus
+            $functionalProjectsCount = $campus->projects()->wherePivot('status_id', Status::where('status_name', 'Functional')->value('id'))->count();
+
+            // Get count of phasedout status on each campus
+            $phasedoutProjectsCount = $campus->projects()->wherePivot('status_id', Status::where('status_name', 'Phased Out')->value('id'))->count();
+
             $campusData[] = [
                 'location' => $campus->location,
                 'projects_count' => $projectCount,
             ];
+
+            $campusStatusData[] = [
+                'location' => $campus->location,
+                'functional_projects_count' => $functionalProjectsCount,
+                'phased_out_projects_count' => $phasedoutProjectsCount,
+            ];
         }
+
+        // dd($campusStatusData);
 
         // $projectsLenght = YourModel::count();
         return view('admin.dashboard', [
@@ -46,6 +61,7 @@ class AdminController extends Controller
             'adminsCount' => $adminsCount,
             'projectsCount' => $projectsCount,
             'campusData' => $campusData,
+            'campusStatusData' => $campusStatusData,
         ]);
     }
 
@@ -168,7 +184,6 @@ class AdminController extends Controller
         $statuses = Status::all();
         $projects = Project::all();
         $campuses = Campus::all();
-
         return view('admin.projects', compact('projects', 'statuses', 'campuses'));
     }
 

@@ -57,24 +57,13 @@ class UserController extends Controller
 
     public function showProjects()
     {
-        // Get the authenticated user's campus location
-        $userLocation = Auth::user()->campus->location;
-
-        // Fetch only the campusProjects that belong to the user's campus location
-        $campusProjects = Project::whereHas('campuses', function ($query) use ($userLocation) {
-            $query->where('location', $userLocation);
-        })
-            ->with(['campuses' => function ($query) use ($userLocation) {
-                $query->where('location', $userLocation);
-            }])
-            ->get();
-
-        // return $campusProjects;
-        // Extract the filtered statuses from the campusProjects
-        $filteredStatuses = $campusProjects->pluck('statuses')->flatten();
-        //return $filteredStatuses;
-        return view('user.projects', compact('campusProjects', 'filteredStatuses'));
+        // Fetch all projects with their related campuses and statuses
+        $statuses = Status::all();
+        $projects = Project::all();
+        $campuses = Campus::all();
+        return view('user.projects', compact('projects', 'statuses', 'campuses'));
     }
+
 
     public function authenticate(Request $request)
     {
@@ -101,5 +90,61 @@ class UserController extends Controller
     {
         Auth::logout();
         return redirect()->route('login');
+    }
+
+    public function createProject(Request $request)
+    {    
+        dd($request);
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'campuses' => 'required|array|min:1', // Check that at least one campus is selected
+            'campuses.*' => 'exists:campuses,id', // Check that the selected campus IDs exist in the 'campuses' table
+            // Add validation rules for the status dropdowns
+            // We use "status_{campus_id}" as the input name format for the status dropdowns
+            // For each selected campus, the corresponding status dropdown should be required and must exist in the 'statuses' table
+            'status_*' => 'required|exists:statuses,id',
+        ]);
+
+        // Create the project
+        $projectData = [
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+        ];
+
+        // Save the project data to the 'projects' table
+        $project = Auth::user()->projects()->create($projectData);
+
+        // Prepare an array to associate campuses and their statuses with the project
+        $campusStatusData = [];
+
+        // Get the selected campus IDs from the request
+        $selectedCampusIds = $request->input('campuses');
+
+        // Loop through the selected campuses and associate their corresponding statuses with the project
+        foreach ($selectedCampusIds as $campusId) {
+            $statusId = $request->input('status_' . $campusId);
+
+            // Validate that the selected status is valid
+            // You may want to add additional validation here if needed
+            $statusExists = Status::where('id', $statusId)->exists();
+
+            if ($statusExists) {
+                // Add the campus ID and status ID to the array
+                $campusStatusData[$campusId] = ['status_id' => $statusId];
+            }
+        }
+
+        // Save the campus-status associations to the 'campus_project' table
+        $project->campuses()->attach($campusStatusData);
+        if ($project) {
+            // Set a flash message to indicate success
+            session()->flash('success', 'Project created successfully!');
+        } else {
+            // Set a flash message to indicate error
+            session()->flash('error', 'Error creating project.');
+        }
+
+        return redirect()->route('user.projects');
     }
 }

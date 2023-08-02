@@ -17,6 +17,7 @@
     <title>@yield('title')</title>
 
     <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="{{ asset('css/admin/campuses-badge.css') }}">
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -345,6 +346,7 @@
     <script src="{{ asset('js/admin/toggle-mode.js') }}"></script> --}}
 
 
+    @yield('script')
     <script src="{{ asset('js/admin/doughnut-charts.js') }}"></script>
     <script src="{{ asset('js/admin/role-select.js') }}"></script>
 
@@ -353,8 +355,9 @@
     {{-- THEME --}}
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 
 </html>

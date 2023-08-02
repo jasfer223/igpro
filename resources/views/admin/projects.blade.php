@@ -108,25 +108,16 @@
                 {{-- .table-responsive START  --}}
                 <div class="table-responsive">
                     <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
-                        <thead>
+                        <thead class="bg-primary text-gray-100">
                             <tr>
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Status</th>
                                 <th>Location</th>
-                                <th class="col-2">Action</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th>Location</th>
-                                <th class="col-2">Action</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
+                        <tbody class="text-gray-800">
 
                             @php
                                 // Define an associative array to map status_id to status_name
@@ -137,63 +128,61 @@
                                 ];
                             @endphp
                             @foreach ($projects as $project)
-                                <tr>
-                                    <td>{{ $project->title }}</td>
-                                    <td>
-                                        {{ $project->description }}
-                                    </td>
-                                    <td>
-                                        @foreach ($project->campuses as $campus)
-                                            <div>    
-                                                @php
-                                                    // Retrieve the status_id for the current campus using the pivot table
-                                                    $status_id = $campus->pivot->status_id;
-                                                    // Determine the status_name based on the status_id using the associative array
-                                                    $statusName = $statusNames[$status_id] ?? 'Unknown';
-                                                    // Determine the badge class based on the status_id
-                                                    $badgeClass = $status_id === 1 ? 'success' : 'danger'; // You can add more conditions as needed
-                                                @endphp
-                                                <span class="badge badge-{{ $badgeClass }}">{{ $statusName }}</span>
-                                            </div>
-                                        @endforeach
+                                @foreach ($project->campuses as $campus)
+                                    <tr>
+                                        <td>{{ $project->title }}</td>
+                                        <td>{{ $project->description }}</td>
+                                        <td>
+                                            @php
+                                                // Retrieve the status_id for the current campus using the pivot table
+                                                $status_id = $campus->pivot->status_id;
+                                                // Determine the status_name based on the status_id using the associative array
+                                                $statusName = $statusNames[$status_id] ?? 'Unknown';
+                                                // Determine the badge class based on the status_id
+                                                $badgeClass = $status_id === 1 ? 'success' : 'danger'; // You can add more conditions as needed
+                                            @endphp
+                                            {{-- <span class="badge badge-{{ $badgeClass }}">{{ $statusName }}</span> --}}
+                                            <span>{{ $statusName }}</span>
+                                        </td>
+                                        <td>
+                                            {{-- @php
+                                                // Define a mapping array to associate status names with Bootstrap badge classes
+                                                $locationBadgeClasses = [
+                                                    'Tandag' => 'primary',
+                                                    'Cantilan' => 'success',
+                                                    'Cagwait' => 'cagwait',
+                                                    'Lianga' => 'danger',
+                                                    'Tagbina' => 'info',
+                                                    'San Miguel' => 'secondary',
+                                                    'Bislig' => 'warning',
+                                                    // Add more campuses and their corresponding badge classes here if needed
+                                                ];
+                                                $badgeClass = $locationBadgeClasses[$campus->location] ?? 'primary';
+                                            @endphp
+                                            <span class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span> --}}
 
-                                    </td>
-
-                                    <td>
-                                        @foreach ($project->campuses as $campus)
-                                            <div>
-                                                @php
-                                                    // Define a mapping array to associate status names with Bootstrap badge classes
-                                                    $locationBadgeClasses = [
-                                                        'Tandag' => 'primary',
-                                                        'Cantilan' => 'success',
-                                                        'Cagwait' => 'dark',
-                                                        'Tagbina' => 'warning',
-                                                        'San Miguel' => 'danger',
-                                                        'Lianga' => 'info',
-                                                        'Bislig' => 'secondary',
-                                                        
-                                                    ];
-                                                    
-                                                    $badgeClass = $locationBadgeClasses[$campus->location] ?? 'primary';
-                                                @endphp
-                                                <span
-                                                    class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span>
-                                            </div>
-                                        @endforeach
-                                    </td>
-
-                                    <td class="col-2">
-                                        <button class="btn btn-success btn-sm" type="button">View</button>
-                                        <button class="btn btn-primary btn-sm" type="button">Edit</button>
-                                        <button class="btn btn-warning btn-sm" type="button">Delete</button>
-                                    </td>
-                                </tr>
+                                            <span>{{ $campus->location }}</span>
+                                        </td>
+                                        <td style="width:  100px;">
+                                            <button class="btn-circle btn btn-info btn-sm" type="button">
+                                                <i class="fas fa-info"> </i>
+                                            </button>
+                                            <button class="btn-circle btn btn-warning btn-sm" type="button">
+                                                <i class="fas fa-edit "></i>
+                                            </button>
+                                            <button class="btn-circle btn btn-danger btn-sm" type="button">
+                                                    <i class="fas fa-trash" > </i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @endforeach
 
                         </tbody>
                     </table>
                 </div> {{-- Table responsive END --}}
+
+
             </div> {{-- .card-body END --}}
         </div> {{-- .card END --}}
     </div> {{-- .container-fluid END --}}

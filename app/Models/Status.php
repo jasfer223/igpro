@@ -11,10 +11,4 @@ class Status extends Model
     use HasFactory;
 
     protected $fillable = ['status_name'];
-
-    public function projects(): HasMany
-    {
-        return $this->hasMany(Project::class);
-    }
-
 }

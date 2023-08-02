@@ -126,14 +126,14 @@
 
                 <div class="table-responsive">
                     <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
-                        <thead>
+                        <thead class="bg-primary text-gray-100">
                             <tr>
 
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Campus</th>
                                 <th>Role</th>
-                                <th class="col-2">Action</th>
+                                <th style="width:  50px;">Action</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -142,10 +142,10 @@
                                 <th>Email</th>
                                 <th>Campus</th>
                                 <th>Role</th>
-                                <th class="col-2">Action</th>
+                                <th style="width:  50px;">Action</th>
                             </tr>
                         </tfoot>
-                        <tbody>
+                        <tbody class="text-gray-800">
 
                             @foreach ($usersWithRoles as $user)
                                 <tr>
@@ -157,9 +157,13 @@
                                             {{ $role->role_name }},
                                         @endforeach
                                     </td>
-                                    <td class="col-2">
-                                        <button class="btn btn-primary btn-sm" type="button">Edit</button>
-                                        <button class="btn btn-warning btn-sm" type="button">Delete</button>
+                                    <td style="width:  50px;">
+                                            <button class="btn-circle btn btn-primary btn-sm" type="button">
+                                                <i class="fas fa-info"></i>
+                                            </button>
+                                            <button class="btn-circle btn btn-danger btn-sm" type="button">
+                                                    <i class="fas fa-trash" > </i>
+                                            </button>
                                     </td>
                                 </tr>
                             @endforeach
