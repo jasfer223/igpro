@@ -107,7 +107,7 @@
 
                 {{-- .table-responsive START  --}}
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="projectsTable" width="100%" cellspacing="0">
                         <thead class="bg-primary text-gray-100">
                             <tr>
                                 <th>Title</th>
@@ -167,7 +167,7 @@
                                             <button class="btn-circle btn btn-info btn-sm" type="button">
                                                 <i class="fas fa-info"> </i>
                                             </button>
-                                            <button class="btn-circle btn btn-warning btn-sm" type="button">
+                                            <button class="btn-circle btn btn-secondary btn-sm" type="button">
                                                 <i class="fas fa-edit "></i>
                                             </button>
                                             <button class="btn-circle btn btn-danger btn-sm" type="button">

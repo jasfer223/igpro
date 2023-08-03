@@ -9,3 +9,8 @@ $(document).ready( function () {
 $(document).ready( function () {
     $('#rolesTable').DataTable();
 } );
+
+$(document).ready( function () {
+    $('#projectsTable').DataTable();
+} );
+

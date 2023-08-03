@@ -1,8 +1,11 @@
-        <!-- resources/views/admin/roles.blade.php -->
+<!-- resources/views/admin/roles.blade.php -->
 
 @extends('layouts.admin')
 
 @section('title', 'NEMSU | IGPro')
+
+@include('admin.includes.edit-role-modal')
+@include('admin.includes.delete-role-modal')
 
 @section('content')
     <div class="container-fluid">
@@ -61,7 +64,7 @@
                                                     placeholder="Enter role name" name="role_name">
                                             </div>
 
-                                            <div class="modal-footer">
+                                            <div class="modal-footer">                                                
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Close</button>
                                                 <input type="submit" class="btn btn-primary" value="Create role">
@@ -82,15 +85,15 @@
                             <tr>
 
                                 <th>ID</th>
-                                <th>Location</th>
-                                <th style="width:  50px;">Action</th>
+                                <th>Role Name</th>
+                                <th style="width:  60px;">Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>ID</th>
-                                <th>Location</th>
-                                <th style="width:  50px;">Action</th>
+                                <th>Role Name</th>
+                                <th style="width:  60px;">Action</th>
                             </tr>
                         </tfoot>
                         <tbody class="text-gray-800">
@@ -99,19 +102,18 @@
                                 <tr>
                                     <td>{{ $role->id }}</td>
                                     <td>{{ $role->role_name }}</td>
-                                    <td style="width:  50px;">
-                                            <button class="btn-circle btn btn-primary btn-sm" type="button">
-                                                <i class="fas fa-edit "></i>
-                                            </button>
-                                            <button class="btn-circle btn btn-danger btn-sm" type="button">
-                                                    <i class="fas fa-trash" > </i>
-                                            </button>
+                                    <td style="width: 60px;">
+                                        <!-- Edit button to open the edit modal -->
+                                        <button type="button" class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editRoleModal" data-role-id="{{ $role->id }}" data-role-name="{{ $role->role_name }}">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <!-- Delete button to open the delete modal -->
+                                        <button type="button" class="btn btn-circle btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteRoleModal" data-role-id="{{ $role->id }}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
-
-
-
                         </tbody>
                     </table>
 
@@ -119,4 +121,23 @@
             </div>
         </div>
     </div>
+@section('script')
+<script>
+    // Handle the click event for the edit button
+    $('.btn-secondary').on('click', function () {
+        const roleId = $(this).data('role-id');
+        const roleName = $(this).data('role-name');
+
+        $('#editRoleId').val(roleId);
+        $('#editRoleName').val(roleName);
+    });
+
+    // Handle the click event for the delete button
+    $('.btn-danger').on('click', function () {
+        const roleId = $(this).data('role-id');
+
+        $('#deleteRoleId').val(roleId);
+    });
+</script>
+@endsection
 @endsection

@@ -4,6 +4,9 @@
 
 @section('title', 'NEMSU | IGPro')
 
+@include('admin.includes.edit-campus-modal')
+@include('admin.includes.delete-campus-modal')
+
 @section('content')
     <div class="container-fluid">
 
@@ -83,14 +86,14 @@
 
                                 <th>ID</th>
                                 <th>Location</th>
-                                <th style="width:  50px;">Action</th>
+                                <th style="width:  60px;">Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>ID</th>
                                 <th>Location</th>
-                                <th style="width:  50px;">Action</th>
+                                <th style="width:  60px;">Action</th>
                             </tr>
                         </tfoot>
                         <tbody class="text-gray-800">
@@ -121,13 +124,15 @@
 
 
                                     </td>
-                                    <td style="width:  50px;">
-                                            <button class="btn-circle btn btn-primary btn-sm" type="button">
-                                                <i class="fas fa-edit "></i>
-                                            </button>
-                                            <button class="btn-circle btn btn-danger btn-sm" type="button">
-                                                    <i class="fas fa-trash" > </i>
-                                            </button>
+                                    <td style="width: 60px;">
+                                        <!-- Edit button to open the edit modal -->
+                                        <button type="button" class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editCampusModal" data-campus-id="{{ $campus->id }}" data-campus-location="{{ $campus->location }}">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <!-- Delete button to open the delete modal -->
+                                        <button type="button" class="btn btn-circle btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteCampusModal" data-role-id="{{ $campus->id }}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -141,4 +146,23 @@
             </div>
         </div>
     </div>
+@section('script')
+<script>
+    // Handle the click event for the edit button
+    $('.btn-secondary').on('click', function () {
+        const campusId = $(this).data('campus-id');
+        const campusLocation = $(this).data('campus-location');
+
+        $('#editCampusId').val(campusId);
+        $('#editCampusLocation').val(campusLocation);
+    });
+
+    // Handle the click event for the delete button
+    $('.btn-danger').on('click', function () {
+        const campusId = $(this).data('campus-id');
+
+        $('#deleteRoleId').val(campusId);
+    });
+</script>
+@endsection
 @endsection

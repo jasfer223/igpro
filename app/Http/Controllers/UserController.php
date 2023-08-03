@@ -44,7 +44,7 @@ class UserController extends Controller
         // Status::create($status);
 
         if (Auth::check()) {
-            return redirect()->route('user.dashboard');
+            return redirect()->back();
         }
 
         return view('login');
@@ -81,9 +81,13 @@ class UserController extends Controller
             } else {
                 return redirect()->route('user.dashboard');
             }
+        } else {
+            // Authentication failed, redirect back to login with errors
+            return redirect()->route('login')->withErrors([
+                'email' => 'Invalid email or password',
+                'password' => 'Invalid email or password',
+            ]);
         }
-
-        return redirect()->route('login')->withErrors(['message' => 'Invalid login credentials.']);
     }
 
     public function userLogout()

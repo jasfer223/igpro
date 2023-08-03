@@ -3,9 +3,12 @@
 
 @section('title', 'NEMSU | IGPro')
 
+@include('admin.includes.edit-user-modal')
+@include('admin.includes.delete-user-modal')
+@include('admin.includes.add-user-modal')
+
 @section('content')
     <div class="container-fluid">
-
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -33,94 +36,10 @@
 
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addUserModal">
                             <i class="fas fa-plus fa-sm text-white-50 mr-1"></i>
                             Add New
                         </button>
-                        {{-- ADD A USER FORM --}}
-                        <form method="POST" action="{{ route('create-user') }}" id="createUserForm">
-                            @csrf
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Create a user account</h5>
-
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-
-
-                                            <div class="input-group mb-3">
-                                                <label for="username">Role</label>
-                                                <select class="users-role-select-multiple" 
-                                                    name="role[]"
-                                                    multiple="multiple" 
-                                                    style="width: 100%"
-                                                    data-placeholder="Select roles">
-                                                    @foreach ($roles as $role)
-                                                        <option value="{{ $role->id }}">{{ $role->role_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <div class="input-group mb-3">
-                                                <label for="username">Campus</label>
-
-                                                <select class="custom-select" name="campus" style="width: 100%">
-                                                    @foreach ($campuses as $campus)
-                                                        <option value="{{ $campus->id }}">{{ $campus->location }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="username">Username</label>
-                                                <input class="form-control" id="username" type="text"
-                                                    placeholder="Enter username" name="username">
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="email">Email address</label>
-                                                <input class="form-control" id="email" type="email"
-                                                    placeholder="Enter email Ex. [name@nemsu.edu.ph]" name="email">
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="password">Password</label>
-                                                <input class="form-control" id="password" type="password"
-                                                    placeholder="Enter password" name="password">
-                                                <span class="text-xs text-danger">
-                                                    @error('password')
-                                                        {{ $message }}
-                                                    @enderror
-                                                </span>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="password_confirmation">Repeat Password</label>
-                                                <input class="form-control" id="password_confirmation" type="password"
-                                                    placeholder="Enter password again" name="password_confirmation">
-                                                <span class="text-danger" id="password-error"></span>
-
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <input type="submit" class="btn btn-primary" value="Create account">
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
 
@@ -133,7 +52,7 @@
                                 <th>Email</th>
                                 <th>Campus</th>
                                 <th>Role</th>
-                                <th style="width:  50px;">Action</th>
+                                <th style="width:  60px;">Action</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -142,7 +61,7 @@
                                 <th>Email</th>
                                 <th>Campus</th>
                                 <th>Role</th>
-                                <th style="width:  50px;">Action</th>
+                                <th style="width:  60px;">Action</th>
                             </tr>
                         </tfoot>
                         <tbody class="text-gray-800">
@@ -157,25 +76,45 @@
                                             {{ $role->role_name }},
                                         @endforeach
                                     </td>
-                                    <td style="width:  50px;">
-                                            <button class="btn-circle btn btn-primary btn-sm" type="button">
-                                                <i class="fas fa-info"></i>
-                                            </button>
-                                            <button class="btn-circle btn btn-danger btn-sm" type="button">
-                                                    <i class="fas fa-trash" > </i>
-                                            </button>
+                                    <td style="width: 60px;">
+                                        <!-- Edit button to open the edit modal -->
+                                        <button type="button" class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal" data-user-id="{{ $user->id }}" data-user-username="{{ $user->username }}" data-user-email="{{ $user->email }}" data-user-campus-id="{{ $user->campus_id }}">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <!-- Delete button to open the delete modal -->
+                                        <button type="button" class="btn btn-circle btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-user-id="{{ $user->id }}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
-
-
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
     </div>
+@section('script')
+<script>
+    // Handle the click event for the edit button
+    $('.btn-secondary').on('click', function () {
+        const userId = $(this).data('user-id');
+        const userUsername = $(this).data('user-username');
+        const userEmail = $(this).data('user-email');
+        const userCampusId = $(this).data('user-campus-id');
 
+        $('#editUserId').val(userId);
+        $('#editUserUsername').val(userUsername);
+        $('#editUserEmail').val(userEmail);
+        $('#editUserCampusId').val(userCampusId);
+    });
+
+    // Handle the click event for the delete button
+    $('.btn-danger').on('click', function () {
+        const userId = $(this).data('user-id');
+
+        $('#deleteUserId').val(userId);
+    });
+</script>
+@endsection
 @endsection

@@ -27,6 +27,7 @@ class AdminController extends Controller
         // Get the count of projects in each campus
         $campuses = Campus::all();
         $campusData = [];
+
         $campusStatusData = [];
         foreach ($campuses as $campus) {
             $projectCount = Project::whereHas('campuses', function ($query) use ($campus) {
@@ -51,6 +52,10 @@ class AdminController extends Controller
             ];
         }
 
+        // $totalProjectsCount = 0;
+        // foreach ($data as $locationData) {
+        //     $totalProjectsCount += $locationData['projects_count'];
+        // }
         // dd($campusStatusData);
 
         // $projectsLenght = YourModel::count();
