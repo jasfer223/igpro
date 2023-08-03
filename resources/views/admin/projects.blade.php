@@ -4,6 +4,10 @@
 
 @section('title', 'NEMSU | IGPro')
 
+@include('admin.includes.edit-project-modal')
+@include('admin.includes.delete-project-modal')
+@include('admin.includes.add-project-modal')
+
 @section('content')
     <div class="container-fluid">
 
@@ -35,73 +39,13 @@
                     <div class="col-sm-12 col-md-6">
 
                         {{-- Add New button toggle modal --}}
-                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" 
+                            class="btn btn-primary mb-3" 
+                            data-toggle="modal" 
+                            data-target="#addNewProjectModal">
                             <i class="fas fa-plus fa-sm text-white-50 mr-1"></i>
                             Add New
                         </button>
-
-                        {{-- form START --}}
-                        <form method="POST" action="{{ route('create-project') }}" id="createProjectForm">
-                            @csrf
-
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Create a Project</h5>
-
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-                                        {{-- .modal-body START --}}
-                                        <div class="modal-body">
-
-                                            <div class="mb-3">
-                                                <label for="title">Title</label>
-                                                <input class="form-control" id="title" type="text"
-                                                    placeholder="Enter project title" name="title">
-                                            </div>
-
-                                            {{-- CKEDITOR --}}
-                                            <div class="mb-3">
-                                                <label for="description">Description</label>
-                                                <textarea class="form-control" id="editor" type="text" placeholder="Enter project description" name="description"> </textarea>
-                                            </div>                                      
-                                            
-                                            <div class="mb-3">
-                                                <label>Select Campuses and Status</label>
-                                                <div class="row">
-                                                    @foreach ($campuses as $campus)
-                                                        <div class="col-6">
-                                                            <input type="checkbox" name="campuses[]" value="{{ $campus->id }}">
-                                                            {{ $campus->location }}
-                                                        </div>
-                                                        <div class="col-6 d-flex justify-content-center align-items-center">
-                                                            <label class="mr-1" for="status_{{ $campus->id }}">Status:</label>
-                                                            <select name="status_{{ $campus->id }}" id="status_{{ $campus->id }}" required>
-                                                                @foreach ($statuses as $status)
-                                                                    <option value="{{ $status->id }}">{{ $status->status_name }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <input type="submit" class="btn btn-primary" value="Create project">
-                                            </div>
-
-                                        </div> {{-- .modal-body END --}}
-                                    </div>
-                                </div>
-                            </div>
-                        </form> {{-- form END --}}
                     </div>
                 </div> {{-- .row END --}}
 
@@ -163,15 +107,17 @@
 
                                             <span>{{ $campus->location }}</span>
                                         </td>
-                                        <td style="width:  100px;">
+                                        <td style="width: 100px;">
                                             <button class="btn-circle btn btn-info btn-sm" type="button">
                                                 <i class="fas fa-info"> </i>
                                             </button>
-                                            <button class="btn-circle btn btn-secondary btn-sm" type="button">
-                                                <i class="fas fa-edit "></i>
+                                            <!-- Edit button to open the edit modal -->
+                                            <button type="button" class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editProjectModal" data-project-id="{{ $project->id }}" data-project-title="{{ $project->title }}" data-project-description="{{ $project->description }}">
+                                                <i class="fas fa-edit"></i>
                                             </button>
-                                            <button class="btn-circle btn btn-danger btn-sm" type="button">
-                                                    <i class="fas fa-trash" > </i>
+                                            <!-- Delete button to open the delete modal -->
+                                            <button type="button" class="btn btn-circle btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProjectModal" data-project-id="{{ $project->id }}">
+                                                <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
                                     </tr>
@@ -185,13 +131,48 @@
 
             </div> {{-- .card-body END --}}
         </div> {{-- .card END --}}
-    </div> {{-- .container-fluid END --}}
-    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
+</div> {{-- .container-fluid END --}}
+
+<script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .catch(error => {
+            console.error(error);
+        });
+    let desc_editor = null;
+    ClassicEditor
+              .create(document.querySelector('#editProjectDescription'))
+              .then(descEditor => {
+                desc_editor = descEditor;
+                desc_editor.setData(projectDescription);
+              })
+              .catch(error => {
                 console.error(error);
-            });
-    </script>
+              });   
+</script>
+@section('script')
+<script>
+    // Handle the click event for the edit button
+    $('.btn-secondary').on('click', function () {
+        const projectId = $(this).data('project-id');
+        const projectTitle = $(this).data('project-title');
+        const projectDescription = $(this).data('project-description');
+
+        $('#editProjectId').val(projectId);
+        $('#editProjectTitle').val(projectTitle);
+        
+        // Set the content of CKEditor
+        desc_editor.setData(projectDescription);
+
+    });
+
+    // Handle the click event for the delete button
+    $('.btn-danger').on('click', function () {
+        const projectId = $(this).data('project-id');
+
+        $('#deleteProjectId').val(projectId);
+    });
+</script>
+@endsection
 @endsection
