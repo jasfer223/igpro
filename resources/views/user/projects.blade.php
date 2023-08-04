@@ -169,7 +169,7 @@
                                                 <button class="btn-circle btn btn-info btn-sm" type="button">
                                                         <i class="fas fa-info"> </i>
                                                 </button>
-                                                <button class="btn-circle btn btn-warning btn-sm" type="button">
+                                                <button class="btn-circle btn btn-secondary btn-sm" type="button">
                                                         <i class="fas fa-edit "></i>
                                                 </button>
                                                 <button class="btn-circle btn btn-danger btn-sm" type="button">
