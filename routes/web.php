@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
 
     // User Manage Projects
     Route::get('/manage/projects', [UserController::class, 'showProjects'])->name('user.projects');
+    Route::post('/manage/projects/edit', [UserController::class, 'editProject'])->name('user-edit-project');
+    Route::post('/manage/projects/create', [UserController::class, 'createProject'])->name('user-create-project');
+    Route::post('/manage/projects/destroy', [UserController::class, 'destroyProject'])->name('user-destroy-project');
 });
 
 

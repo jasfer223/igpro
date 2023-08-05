@@ -43,9 +43,9 @@ class UserController extends Controller
         // ];
         // Status::create($status);
 
-        if (Auth::check()) {
-            return redirect()->back();
-        }
+        // if (Auth::check()) {
+        //     return redirect()->back();
+        // }
 
         return view('login');
     }
