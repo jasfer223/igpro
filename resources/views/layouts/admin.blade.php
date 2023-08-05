@@ -25,6 +25,7 @@
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/admin/campuses-badge.css') }}">
+
     {{-- FOR DATATABLE --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
 
@@ -328,17 +329,6 @@
 
     <!-- Page level plugins -->
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-
-    <!-- Page level custom scripts -->
-    {{--     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script> --}}
-
-    {{-- 
-    <script>
-  window.userDashboardUrl = "{{ route('user.dashboard') }}";
-  window.adminDashboardUrl = "{{ route('admin.dashboard') }}";
-</script>
-
 
 
     <script src="{{ asset('js/admin/toggle-mode.js') }}"></script> --}}

@@ -4,6 +4,10 @@
 
 @section('title', 'NEMSU | IGPro')
 
+@include('user.includes.delete-project-modal')
+@include('user.includes.edit-project-modal')
+@include('user.includes.add-project-modal')
+
 @section('content')
     <div class="container-fluid">
 
@@ -34,76 +38,11 @@
                     <div class="col-sm-12 col-md-6">
 
                         {{-- Add new button toggle modal --}}
-                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addProjectModal">
                             <i class="fas fa-plus fa-sm text-white-50 mr-1"></i>
                             Add New
                         </button>
 
-                        {{-- Add project form --}}
-                        <form method="POST" action="{{ route('create-project') }}" id="createProjectForm">
-                            @csrf
-
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Create a Project</h5>
-
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-                                        {{-- Project form modal BODY --}}
-                                        <div class="modal-body">
-
-                                            <div class="mb-3">
-                                                <label for="title">Title</label>
-                                                <input class="form-control" id="title" type="text"
-                                                    placeholder="Enter project title" name="title">
-                                            </div>
-
-                                            {{-- CKEDITOR --}}
-                                            <div class="mb-3">
-                                                <label for="description">Description</label>
-                                                <textarea class="form-control" id="user-description" type="text" placeholder="Enter project description" name="description"> </textarea>
-                                            </div> 
-
-                                            <div class="mb-3">
-                                                <label>Select Campus and Status</label>
-                                                <div class="row">
-                                                    @foreach ($campuses as $campus)
-                                                        @if (Auth::user()->campus->location === $campus->location)
-                                                            <div class="col-6">
-                                                                <input type="checkbox" name="campuses[]" value="{{ $campus->id }}">
-                                                                {{ $campus->location }}
-                                                            </div>
-                                                            <div class="col-6 d-flex justify-content-center align-items-center">
-                                                                <label class="mr-1" for="status_{{ $campus->id }}">Status:</label>
-                                                                <select name="status_{{ $campus->id }}" id="status_{{ $campus->id }}" required>
-                                                                    @foreach ($statuses as $status)
-                                                                        <option value="{{ $status->id }}">{{ $status->status_name }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                            </div>
-
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <input type="submit" class="btn btn-primary" value="Create project">
-                                            </div>
-
-                                        </div> {{-- Modal body END --}}
-                                    </div>
-                                </div>
-                            </div>
-                        </form> {{-- FORM END --}}
                     </div>
                 </div> {{-- Row END --}}
                 {{-- .table-responsive START  --}}
@@ -163,17 +102,19 @@
                                             <span class="badge badge-{{ $badgeClass }}">{{ $campus->location }}</span> --}}
                                             <span>{{ $campus->location }}</span>
                                         </td>
-                                        <td class=" -2">
+                                        <td style="width: 100px;">
                                             @if ($campus->location === Auth::user()->campus->location)
-                                                {{-- Only show the action buttons if the campus location matches the authenticated user's location --}}
                                                 <button class="btn-circle btn btn-info btn-sm" type="button">
-                                                        <i class="fas fa-info"> </i>
+                                                <i class="fas fa-info"> </i>
                                                 </button>
-                                                <button class="btn-circle btn btn-secondary btn-sm" type="button">
-                                                        <i class="fas fa-edit "></i>
+                                            
+                                                <button type="button" class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editProjectModal">
+                                                    <i class="fas fa-edit"></i>
                                                 </button>
-                                                <button class="btn-circle btn btn-danger btn-sm" type="button">
-                                                        <i class="fas fa-trash" > </i>
+                                                
+                                                <!-- Delete button to open the delete modal -->
+                                                <button type="button" class="btn btn-circle btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProjectModal" data-project-id="{{ $project->id }}">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             @else
                                                 <button class="btn-circle btn btn-info btn-sm" type="button">
@@ -198,9 +139,53 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
 <script>
     ClassicEditor
-        .create(document.querySelector('#user-description'))
+        .create(document.querySelector('#user-description'), {
+            toolbar: {
+                items: [
+                    'heading',
+                    '|',
+                    'bold',
+                    'italic',
+                    'link',
+                    'bulletedList',
+                    'numberedList',
+                    '|',
+                    'undo',
+                    'redo'
+                ]
+            },
+            removeButtons: 'Table,Image'
+        })
         .catch(error => {
             console.error(error);
         });
+
+    ClassicEditor
+        .create(document.querySelector('#editProjectDescription'), {
+            toolbar: {
+                items: [
+                    'heading',
+                    '|',
+                    'bold',
+                    'italic',
+                    'link',
+                    'bulletedList',
+                    'numberedList',
+                    '|',
+                    'undo',
+                    'redo'
+                ]
+            },
+            removeButtons: 'Table,Image'
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+        
 </script>
+@section('script')
+<script>
+</script>
+@endsection
 @endsection

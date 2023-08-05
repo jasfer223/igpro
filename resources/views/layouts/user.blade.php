@@ -26,14 +26,20 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
-
-    {{-- USER MODE BUTTON STYLE --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/admin/user-mode-btn.css') }}"> --}}
-
     {{-- FOR DATATABLE --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
     <script defer src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
     <script defer src="{{ asset('js/admin/datatable.js') }}"></script>
+
+    {{-- SELECT 2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- SELECT TO BS5 THEME --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <!-- Or for RTL support -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
 
 </head>
 
@@ -295,7 +301,6 @@
             </div>
         </div>
     </div>
-
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -309,20 +314,23 @@
     <!-- Page level plugins -->
     <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
-
-    {{-- 
-    <script>
-  window.userDashboardUrl = "{{ route('user.dashboard') }}";
-  window.adminDashboardUrl = "{{ route('admin.dashboard') }}";
-</script>
-
-
 
     <script src="{{ asset('js/admin/toggle-mode.js') }}"></script> --}}
 
+
+    @yield('script')
+
+    {{-- DATATABLES SCRIPTS --}}
+    <script defer src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+    <script defer src="{{ asset('js/admin/datatable.js') }}"></script>
+
+    {{-- SELECT 2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- THEME --}}
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

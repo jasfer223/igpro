@@ -7,12 +7,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="editProjectForm" action="{{ route('edit-project') }}" method="POST">
+        <form id="editProjectForm" action="{{ route('edit-user') }}" method="POST">
             @csrf
             <input type="hidden" name="user_id" id="editProjectId">
             <div class="mb-3">
                 <label for="editProjectTitle" class="form-label">Title</label>
-                <input type="text" class="form-control" id="editProjectTitle" placeholder="Enter project title" name="project_title">
+                <input type="text" class="form-control" id="editProjectTitle" name="project_title">
             </div>
             {{-- CKEDITOR --}}
             <div class="mb-3">
@@ -21,7 +21,7 @@
             </div>  
             <div class="input-group mb-3">
                       <label for="campus">Campus</label>
-                      <select class="form-control" 
+                      <select class="users-role-select-multiple" 
                           name="campus"
                           style="width: 100%"
                           data-placeholder="Select roles">
@@ -32,7 +32,7 @@
             </div>
             <div class="input-group mb-3">
                 <label class="mr-1" for="status_{{ $campus->id }}">Status</label>
-                <select class="form-control" name="status_{{ $campus->id }}" id="status_{{ $campus->id }}" style="width: 100%" required>
+                <select class="users-role-select-multiple" name="status_{{ $campus->id }}" id="status_{{ $campus->id }}" style="width: 100%" required>
                     @foreach ($statuses as $status)
                         <option value="{{ $status->id }}">{{ $status->status_name }}</option>
                     @endforeach
