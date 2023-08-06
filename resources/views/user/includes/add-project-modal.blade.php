@@ -13,7 +13,7 @@ aria-labelledby="addProjectModalLabel" aria-hidden="true">
 
         {{-- Project form modal BODY --}}
         <div class="modal-body">
-            <form method="POST" action="{{ route('create-project') }}" id="createProjectForm">
+            <form method="POST" action="{{ route('user-create-project') }}" id="createProjectForm">
             @csrf
                 <div class="mb-3">
                     <label for="title">Title</label>

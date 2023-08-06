@@ -39,6 +39,11 @@ class UserController extends Controller
         // $user->roles()->attach($role);
 
         // $status = [
+        //     'status_name' => 'Functional',
+        // ];
+        // Status::create($status);
+
+        // $status = [
         //     'status_name' => 'Phased Out',
         // ];
         // Status::create($status);
@@ -98,7 +103,6 @@ class UserController extends Controller
 
     public function createProject(Request $request)
     {    
-        dd($request);
         $request->validate([
             'title' => 'required',
             'description' => 'required',

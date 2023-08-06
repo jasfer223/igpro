@@ -81,8 +81,8 @@
                                                 // Determine the badge class based on the status_id
                                                 $badgeClass = $status_id === 1 ? 'success' : 'danger'; // You can add more conditions as needed
                                             @endphp
-                                            {{-- <span class="badge badge-{{ $badgeClass }}">{{ $statusName }}</span> --}}
-                                            <span>{{ $statusName }}</span>
+                                            <span class="badge badge-{{ $badgeClass }}">{{ $statusName }}</span>
+                                            {{-- <span>{{ $statusName }}</span> --}}
                                         </td>
                                         <td>
                                             {{-- @php

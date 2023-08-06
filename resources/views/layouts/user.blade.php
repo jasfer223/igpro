@@ -168,25 +168,6 @@
                             </div>
                         </li>
 
-
-                        {{-- ADMIN MODE --}}
-
-
-                        {{--   @if (auth()->user()->hasAnyRole('Admin'))
-                        <div class="nav-item">
-                            <div class="nav-link">
-                                <!-- Toggle switch for User Mode and Admin Mode -->
-                                <div class="switch">
-                                  <label>
-                                    <input type="checkbox" id="modeSwitch">
-                                    <span class="slider"></span>
-                                    <span class="d-none d-sm-inline ml-2" id="modeLabel">User Mode</span>
-                                  </label>
-                                </div>
-                            </div>
-                          </div>
-                        @endif --}}
-
                         @if (auth()->user()->hasAnyRole('Admin'))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.dashboard') }}">
@@ -206,8 +187,9 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    <i class="fas fa-user fa-fw pr-1"></i>
-                                    {{ auth()->user()->username }}</span>
+                                    {{ auth()->user()->username }}
+                                </span>
+                                <i class="fas fa-user fa-fw pr-1"></i>
                                 {{-- <img class="img-profile rounded-circle" src="{{ asset('images/myphoto.png') }}"
                                     alt="..."> --}}
                             </a>
