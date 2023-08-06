@@ -136,56 +136,9 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-        .create(document.querySelector('#user-description'), {
-            toolbar: {
-                items: [
-                    'heading',
-                    '|',
-                    'bold',
-                    'italic',
-                    'link',
-                    'bulletedList',
-                    'numberedList',
-                    '|',
-                    'undo',
-                    'redo'
-                ]
-            },
-            removeButtons: 'Table,Image'
-        })
-        .catch(error => {
-            console.error(error);
-        });
 
-    ClassicEditor
-        .create(document.querySelector('#editProjectDescription'), {
-            toolbar: {
-                items: [
-                    'heading',
-                    '|',
-                    'bold',
-                    'italic',
-                    'link',
-                    'bulletedList',
-                    'numberedList',
-                    '|',
-                    'undo',
-                    'redo'
-                ]
-            },
-            removeButtons: 'Table,Image'
-        })
-        .catch(error => {
-            console.error(error);
-        });
-
-        
-</script>
 @section('script')
-<script>
-</script>
+<script src="{{ asset('js/user/ckeditor.js') }}"></script>
 @endsection
+
 @endsection

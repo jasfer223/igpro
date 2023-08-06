@@ -296,9 +296,11 @@
     {{-- Select2 --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    {{-- CKEDITOR --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
+
     {{-- My custom scripts --}}
     @yield('script')
-    <script src="{{ asset('js/admin/toggle-mode.js') }}"></script>
     <script src="{{ asset('js/admin/datatable.js') }}"></script>
 
 </body>

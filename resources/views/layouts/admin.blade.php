@@ -307,11 +307,11 @@
     {{-- Datatables --}}
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
 
+    {{-- CKEDITOR --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
+    
     {{-- My custom scripts --}}
     @yield('script')
-    <script src="{{ asset('js/admin/toggle-mode.js') }}"></script>
-    <script src="{{ asset('js/admin/doughnut-charts.js') }}"></script>
-    <script src="{{ asset('js/admin/role-select.js') }}"></script>
     <script src="{{ asset('js/admin/datatable.js') }}"></script>
 
 </body>

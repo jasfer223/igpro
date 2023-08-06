@@ -131,7 +131,8 @@
         <script> 
             var campusData = @json($campusData);
             var campusStatusData = @json($campusStatusData);   
-        </script>   
+        </script> 
+        <script src="{{ asset('js/admin/doughnut-charts.js') }}"></script>  
     @endsection
 
 @endsection
