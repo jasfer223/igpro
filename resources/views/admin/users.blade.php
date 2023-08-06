@@ -78,11 +78,11 @@
                                     </td>
                                     <td style="width: 60px;">
                                         <!-- Edit button to open the edit modal -->
-                                        <button type="button" class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal" data-user-id="{{ $user->id }}" data-user-username="{{ $user->username }}" data-user-email="{{ $user->email }}" data-user-campus-id="{{ $user->campus_id }}">
+                                        <button type="button" class="btn btn-circle btn-secondary btn-sm" data-toggle="modal" data-target="#editUserModal" data-user-id="{{ $user->id }}" data-user-username="{{ $user->username }}" data-user-email="{{ $user->email }}" data-user-campus-id="{{ $user->campus_id }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <!-- Delete button to open the delete modal -->
-                                        <button type="button" class="btn btn-circle btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-user-id="{{ $user->id }}">
+                                        <button type="button" class="btn btn-circle btn-danger btn-sm" data-toggle="modal" data-target="#deleteUserModalCenter" data-user-id="{{ $user->id }}">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>

@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
                 <form id="editUserForm" action="{{ route('edit-user') }}" method="POST">
@@ -12,11 +12,10 @@
                     <input type="hidden" name="user_id" id="editUserId">
                     <div class="input-group mb-3">
 	                    <label for="username">Role</label>
-	                    <select class="users-role-select-multiple" 
+	                    <select class="form-control"
 	                        name="role[]"
-	                        multiple="multiple" 
-	                        style="width: 100%"
-	                        data-placeholder="Select roles">
+	                        multiple 
+	                        style="width: 100%">
 	                        @foreach ($roles as $role)
 	                            <option value="{{ $role->id }}">{{ $role->role_name }}</option>
 	                        @endforeach
@@ -41,7 +40,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" onclick="document.getElementById('editUserForm').submit()">Save changes</button>
             </div>
     </div>

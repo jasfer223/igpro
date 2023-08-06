@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="editProjectModalLabel">Edit Project</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form id="editProjectForm" action="{{ route('edit-user') }}" method="POST">
@@ -21,7 +21,7 @@
             </div>  
             <div class="input-group mb-3">
                       <label for="campus">Campus</label>
-                      <select class="users-role-select-multiple" 
+                      <select class="form-control" 
                           name="campus"
                           style="width: 100%"
                           data-placeholder="Select roles">
@@ -32,7 +32,7 @@
             </div>
             <div class="input-group mb-3">
                 <label class="mr-1" for="status_{{ $campus->id }}">Status</label>
-                <select class="users-role-select-multiple" name="status_{{ $campus->id }}" id="status_{{ $campus->id }}" style="width: 100%" required>
+                <select class="form-control" name="status_{{ $campus->id }}" id="status_{{ $campus->id }}" style="width: 100%" required>
                     @foreach ($statuses as $status)
                         <option value="{{ $status->id }}">{{ $status->status_name }}</option>
                     @endforeach
@@ -41,7 +41,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="document.getElementById('editProjectForm').submit()">Save changes</button>
       </div>
     </div>

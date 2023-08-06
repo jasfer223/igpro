@@ -6,6 +6,7 @@
 
 @include('admin.includes.edit-campus-modal')
 @include('admin.includes.delete-campus-modal')
+@include('admin.includes.add-campus-modal')
 
 @section('content')
     <div class="container-fluid">
@@ -37,46 +38,11 @@
 
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addNewCampusModal">
                             <i class="fas fa-plus fa-sm text-white-50 mr-1"></i>
                             Add New
                         </button>
-                        {{-- ADD A USER FORM --}}
-                        <form method="POST" action="{{ route('create-campus') }}">
-                            @csrf
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Create a user account</h5>
-
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <div class="mb-3">
-                                                <label for="location">Location</label>
-                                                <input class="form-control" id="location" type="text"
-                                                    placeholder="Enter campus location" name="location">
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <input type="submit" class="btn btn-primary" value="Create campus">
-                                                {{-- <button type="submit" class="btn btn-primary">Save changes</button> --}}
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -126,11 +92,11 @@
                                     </td>
                                     <td style="width: 60px;">
                                         <!-- Edit button to open the edit modal -->
-                                        <button type="button" class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editCampusModal" data-campus-id="{{ $campus->id }}" data-campus-location="{{ $campus->location }}">
+                                        <button type="button" class="btn btn-circle btn-secondary btn-sm" data-toggle="modal" data-target="#editCampusModal" data-campus-id="{{ $campus->id }}" data-campus-location="{{ $campus->location }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <!-- Delete button to open the delete modal -->
-                                        <button type="button" class="btn btn-circle btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteCampusModal" data-role-id="{{ $campus->id }}">
+                                        <button type="button" class="btn btn-circle btn-danger btn-sm" data-toggle="modal" data-target="#deleteCampusModalCenter" data-role-id="{{ $campus->id }}">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>

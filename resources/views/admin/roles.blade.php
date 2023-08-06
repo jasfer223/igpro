@@ -6,6 +6,7 @@
 
 @include('admin.includes.edit-role-modal')
 @include('admin.includes.delete-role-modal')
+@include('admin.includes.add-role-modal')
 
 @section('content')
     <div class="container-fluid">
@@ -37,46 +38,11 @@
 
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addNewRoleModal">
                             <i class="fas fa-plus fa-sm text-white-50 mr-1"></i>
                             Add New
                         </button>
-                        {{-- ADD A USER FORM --}}
-                        <form method="POST" action="{{ route('create-role') }}">
-                            @csrf
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Create a user account</h5>
 
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <div class="mb-3">
-                                                <label for="role_name">Location</label>
-                                                <input class="form-control" id="role_name" type="text"
-                                                    placeholder="Enter role name" name="role_name">
-                                            </div>
-
-                                            <div class="modal-footer">                                                
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <input type="submit" class="btn btn-primary" value="Create role">
-                                                {{-- <button type="submit" class="btn btn-primary">Save changes</button> --}}
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -104,11 +70,11 @@
                                     <td>{{ $role->role_name }}</td>
                                     <td style="width: 60px;">
                                         <!-- Edit button to open the edit modal -->
-                                        <button type="button" class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editRoleModal" data-role-id="{{ $role->id }}" data-role-name="{{ $role->role_name }}">
+                                        <button type="button" class="btn btn-circle btn-secondary btn-sm" data-toggle="modal" data-target="#editRoleModal" data-role-id="{{ $role->id }}" data-role-name="{{ $role->role_name }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <!-- Delete button to open the delete modal -->
-                                        <button type="button" class="btn btn-circle btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteRoleModal" data-role-id="{{ $role->id }}">
+                                        <button type="button" class="btn btn-circle btn-danger btn-sm" data-toggle="modal" data-target="#deleteRoleModalCenter" data-role-id="{{ $role->id }}">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
