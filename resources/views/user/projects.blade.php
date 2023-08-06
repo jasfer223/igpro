@@ -108,12 +108,12 @@
                                                 <i class="fas fa-info"> </i>
                                                 </button>
                                             
-                                                <button type="button" class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editProjectModal">
+                                                <button type="button" class="btn btn-circle btn-secondary btn-sm" data-toggle="modal" data-target="#editProjectModal">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                                 
                                                 <!-- Delete button to open the delete modal -->
-                                                <button type="button" class="btn btn-circle btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProjectModal" data-project-id="{{ $project->id }}">
+                                                <button type="button" class="btn btn-circle btn-danger btn-sm" data-toggle="modal" data-target="#deleteProjectModalCenter" data-project-id="{{ $project->id }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             @else

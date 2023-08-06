@@ -49,19 +49,11 @@
                     <table class="table table-bordered" id="rolesTable" width="100%" cellspacing="0">
                         <thead class="bg-primary text-gray-100">
                             <tr>
-
-                                <th>ID</th>
+                                <th style="width:  20px;">#</th>
                                 <th>Role Name</th>
                                 <th style="width:  60px;">Action</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>ID</th>
-                                <th>Role Name</th>
-                                <th style="width:  60px;">Action</th>
-                            </tr>
-                        </tfoot>
                         <tbody class="text-gray-800">
 
                             @foreach ($roles as $role)

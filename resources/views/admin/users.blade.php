@@ -47,7 +47,7 @@
                     <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
                         <thead class="bg-primary text-gray-100">
                             <tr>
-
+                                <th style="width: 20px;">#</th>
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Campus</th>
@@ -55,19 +55,11 @@
                                 <th style="width:  60px;">Action</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Campus</th>
-                                <th>Role</th>
-                                <th style="width:  60px;">Action</th>
-                            </tr>
-                        </tfoot>
                         <tbody class="text-gray-800">
 
                             @foreach ($usersWithRoles as $user)
                                 <tr>
+                                    <td>{{ $user->id }}</td>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->campus->location }}</td>

@@ -54,6 +54,7 @@
                     <table class="table table-bordered" id="projectsTable" width="100%" cellspacing="0">
                         <thead class="bg-primary text-gray-100">
                             <tr>
+                                <th>#</th>
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Status</th>
@@ -74,6 +75,7 @@
                             @foreach ($projects as $project)
                                 @foreach ($project->campuses as $campus)
                                     <tr>
+                                        <td>{{ $project->id }}</td>
                                         <td>{{ $project->title }}</td>
                                         <td>{{ $project->description }}</td>
                                         <td>

@@ -38,7 +38,7 @@ aria-labelledby="addProjectModalLabel" aria-hidden="true">
                                 </div>
                                 <div class="col-6 d-flex justify-content-center align-items-center">
                                     <label class="mr-1" for="status_{{ $campus->id }}">Status:</label>
-                                    <select class="project-status" 
+                                    <select class="form-control" 
                                         name="status_{{ $campus->id }}" 
                                         id="status_{{ $campus->id }}" 
                                         required>
