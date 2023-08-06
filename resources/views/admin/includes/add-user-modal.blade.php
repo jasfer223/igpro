@@ -19,7 +19,7 @@
 
                 <div class="input-group mb-3">
                     <label for="username">Role</label>
-                    <select class="users-role-select-multiple" 
+                    <select class="form-control"
                         name="role[]"
                         multiple="multiple" 
                         style="width: 100%"

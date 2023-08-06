@@ -54,6 +54,7 @@
                     <table class="table table-bordered" id="projectsTable" width="100%" cellspacing="0">
                         <thead class="bg-primary text-gray-100">
                             <tr>
+                                <th>#</th>
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Status</th>
@@ -74,6 +75,7 @@
                             @foreach ($projects as $project)
                                 @foreach ($project->campuses as $campus)
                                     <tr>
+                                        <td>{{ $project->id }}</td>
                                         <td>{{ $project->title }}</td>
                                         <td>{{ $project->description }}</td>
                                         <td>
@@ -112,11 +114,11 @@
                                                 <i class="fas fa-info"> </i>
                                             </button>
                                             <!-- Edit button to open the edit modal -->
-                                            <button type="button" class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editProjectModal" data-project-id="{{ $project->id }}" data-project-title="{{ $project->title }}" data-project-description="{{ $project->description }}">
+                                            <button type="button" class="btn btn-circle btn-secondary btn-sm" data-toggle="modal" data-target="#editProjectModal" data-project-id="{{ $project->id }}" data-project-title="{{ $project->title }}" data-project-description="{{ $project->description }}">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <!-- Delete button to open the delete modal -->
-                                            <button type="button" class="btn btn-circle btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProjectModal" data-project-id="{{ $project->id }}">
+                                            <button type="button" class="btn btn-circle btn-danger btn-sm" data-toggle="modal" data-target="#deleteProjectModalCenter" data-project-id="{{ $project->id }}">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>

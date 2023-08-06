@@ -37,7 +37,10 @@
                                 </div>
                                 <div class="col-6 d-flex justify-content-center align-items-center">
                                     <label class="mr-1" for="status_{{ $campus->id }}">Status:</label>
-                                    <select name="status_{{ $campus->id }}" id="status_{{ $campus->id }}" required>
+                                    <select class="form-control mb-3"
+                                        name="status_{{ $campus->id }}" 
+                                        id="status_{{ $campus->id }}" 
+                                        required>
                                         @foreach ($statuses as $status)
                                             <option value="{{ $status->id }}">{{ $status->status_name }}</option>
                                         @endforeach

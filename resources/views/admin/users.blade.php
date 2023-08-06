@@ -47,7 +47,7 @@
                     <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
                         <thead class="bg-primary text-gray-100">
                             <tr>
-
+                                <th style="width: 20px;">#</th>
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Campus</th>
@@ -55,19 +55,11 @@
                                 <th style="width:  60px;">Action</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Campus</th>
-                                <th>Role</th>
-                                <th style="width:  60px;">Action</th>
-                            </tr>
-                        </tfoot>
                         <tbody class="text-gray-800">
 
                             @foreach ($usersWithRoles as $user)
                                 <tr>
+                                    <td>{{ $user->id }}</td>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->campus->location }}</td>
@@ -78,11 +70,11 @@
                                     </td>
                                     <td style="width: 60px;">
                                         <!-- Edit button to open the edit modal -->
-                                        <button type="button" class="btn btn-circle btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal" data-user-id="{{ $user->id }}" data-user-username="{{ $user->username }}" data-user-email="{{ $user->email }}" data-user-campus-id="{{ $user->campus_id }}">
+                                        <button type="button" class="btn btn-circle btn-secondary btn-sm" data-toggle="modal" data-target="#editUserModal" data-user-id="{{ $user->id }}" data-user-username="{{ $user->username }}" data-user-email="{{ $user->email }}" data-user-campus-id="{{ $user->campus_id }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <!-- Delete button to open the delete modal -->
-                                        <button type="button" class="btn btn-circle btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-user-id="{{ $user->id }}">
+                                        <button type="button" class="btn btn-circle btn-danger btn-sm" data-toggle="modal" data-target="#deleteUserModalCenter" data-user-id="{{ $user->id }}">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
