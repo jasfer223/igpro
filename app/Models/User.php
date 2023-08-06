@@ -47,12 +47,12 @@ class User extends Authenticatable
     
     public function campus(): BelongsTo
     {
-        return $this->belongsTo(Campus::class);
+        return $this->belongsTo(Campus::class, 'campus_id');
     }
 
     public function projects(): HasMany
     {
-        return $this->hasMany(Project::class);
+        return $this->hasMany(Project::class, 'user_id');
     }
     public function isAdmin()
     {

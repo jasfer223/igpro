@@ -39,6 +39,9 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
 
+    {{-- Boostrap Toggle --}}
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -193,25 +196,10 @@
 
                         </div>
 
-                        {{--                           <div class="nav-item">
-                            <div class="nav-link">
-
-                                <div class="switch">
-                                  <label>
-                                    <input type="checkbox" id="modeSwitch">
-                                    <span class="slider"></span>
-                                    <span class="d-none d-sm-inline ml-2" id="modeLabel">User Mode</span>
-                                  </label>
-                                </div>
-                            </div>
-                          </div>
-                         --}}
-
                         <!-- USER MODE -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.dashboard') }}">
                                 <span class="d-none d-sm-inline mr-1 text-gray-700">USER MODE</span>
-                                {{-- <i class="fas fa-user fa-fw"></i> --}}
                             </a>
                         </li>
 
@@ -222,8 +210,9 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    <i class="fas fa-user-secret pr-1"></i>
+                                    
                                     {{ auth()->user()->username }}</span>
+                                <i class="fas fa-user-secret pr-1"></i>                                    
                                 {{-- <img class="img-profile rounded-circle" src="{{ asset('images/myphoto.png') }}"
                                     alt="..."> --}}
                             </a>
@@ -236,14 +225,6 @@
                                 </a>
 
                                 <div class="dropdown-divider"></div>
-
-                                {{-- <form method="POST" action="{{ route('logout') }}" id="logoutForm">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </button>
-                                </form> --}}
 
                                 <a class="dropdown-item" href="" data-toggle="modal"
                                     data-target="#logoutModal">
@@ -350,6 +331,8 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
+    {{-- Boostrap toggle --}}
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 </body>
 
 </html>
