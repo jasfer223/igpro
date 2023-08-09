@@ -4,10 +4,6 @@
 
 @section('title', 'NEMSU | IGPro')
 
-@include('admin.includes.edit-role-modal')
-@include('admin.includes.delete-role-modal')
-@include('admin.includes.add-role-modal')
-
 @section('content')
     <div class="container-fluid">
 
@@ -79,6 +75,11 @@
             </div>
         </div>
     </div>
+
+@include('admin.includes.edit-role-modal')
+@include('admin.includes.delete-role-modal')
+@include('admin.includes.add-role-modal')
+
 @section('script')
 <script>
     // Handle the click event for the edit button

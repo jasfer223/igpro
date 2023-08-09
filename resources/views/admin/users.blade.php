@@ -3,10 +3,6 @@
 
 @section('title', 'NEMSU | IGPro')
 
-@include('admin.includes.edit-user-modal')
-@include('admin.includes.delete-user-modal')
-@include('admin.includes.add-user-modal')
-
 @section('content')
     <div class="container-fluid">
         @if (session('success'))
@@ -86,6 +82,11 @@
             </div>
         </div>
     </div>
+
+@include('admin.includes.edit-user-modal')
+@include('admin.includes.delete-user-modal')
+@include('admin.includes.add-user-modal')
+    
 @section('script')
 <script>
     // Handle the click event for the edit button
