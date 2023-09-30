@@ -20,7 +20,7 @@ class UserController extends Controller
         //     'location' => 'Tandag',
         // ];
         // Campus::create($campus);
-        
+
         // $user = [
         //     'username' => 'igpro',
         //     'email' => 'igpro@nemsu.edu.ph',
@@ -102,7 +102,7 @@ class UserController extends Controller
     }
 
     public function createProject(Request $request)
-    {    
+    {
         $request->validate([
             'title' => 'required',
             'description' => 'required',
