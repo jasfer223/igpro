@@ -4,10 +4,6 @@
 
 @section('title', 'NEMSU | IGPro')
 
-@include('admin.includes.edit-campus-modal')
-@include('admin.includes.delete-campus-modal')
-@include('admin.includes.add-campus-modal')
-
 @section('content')
     <div class="container-fluid">
 
@@ -104,6 +100,11 @@
             </div>
         </div>
     </div>
+
+@include('admin.includes.edit-campus-modal')
+@include('admin.includes.delete-campus-modal')
+@include('admin.includes.add-campus-modal')
+    
 @section('script')
 <script>
     // Handle the click event for the edit button

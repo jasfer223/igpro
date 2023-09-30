@@ -129,8 +129,8 @@
 </div>
     @section('script')
         <script> 
-            var campusData = @json($campusData);
-            var campusStatusData = @json($campusStatusData);   
+            let campusData = @json($campusData);
+            let campusStatusData = @json($campusStatusData);   
         </script> 
         <script src="{{ asset('js/admin/doughnut-charts.js') }}"></script>  
     @endsection

@@ -20,6 +20,8 @@ removeButtons: 'Table,Image'
 console.error(error);
 });
 
+
+
 let desc_editor = null;
 ClassicEditor
 .create(document.querySelector('#editProjectDescription'), {
@@ -41,8 +43,17 @@ removeButtons: 'Table,Image'
 })
 .then(descEditor => {
 desc_editor = descEditor;
-desc_editor.setData(projectDescription);
+// desc_editor.setData(projectDescription);
 })
 .catch(error => {
 console.error(error);
+});
+
+// Handle the modal closing event
+$('#editProjectModal').on('hidden.modal', function () {
+    // Destroy the CKEditor instance when the modal is closed
+    if (desc_editor) {
+        desc_editor.destroy()
+        desc_editor = null;
+    }
 });

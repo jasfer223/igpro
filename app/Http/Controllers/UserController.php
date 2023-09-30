@@ -16,11 +16,12 @@ class UserController extends Controller
 
     public function showLogin()
     {
+        //FOR FRESH CLONE UNCOMMENT THIS AND GOTO LOGIN ROUTE THEN COMMENT IT AGAIN
         // $campus = [
         //     'location' => 'Tandag',
         // ];
         // Campus::create($campus);
-        
+
         // $user = [
         //     'username' => 'igpro',
         //     'email' => 'igpro@nemsu.edu.ph',
@@ -102,7 +103,7 @@ class UserController extends Controller
     }
 
     public function createProject(Request $request)
-    {    
+    {
         $request->validate([
             'title' => 'required',
             'description' => 'required',

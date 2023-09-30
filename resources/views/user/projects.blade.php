@@ -4,10 +4,6 @@
 
 @section('title', 'NEMSU | IGPro')
 
-@include('user.includes.delete-project-modal')
-@include('user.includes.edit-project-modal')
-@include('user.includes.add-project-modal')
-
 @section('content')
     <div class="container-fluid">
 
@@ -136,6 +132,10 @@
         </div>
     </div>
 </div>
+
+@include('user.includes.delete-project-modal')
+@include('user.includes.edit-project-modal')
+@include('user.includes.add-project-modal')
 
 @section('script')
 <script src="{{ asset('js/user/ckeditor.js') }}"></script>

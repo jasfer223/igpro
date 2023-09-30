@@ -1,12 +1,6 @@
-<!-- resources/views/admin/projects.blade.php -->
-
 @extends('layouts.admin')
 
 @section('title', 'NEMSU | IGPro')
-
-@include('admin.includes.edit-project-modal')
-@include('admin.includes.delete-project-modal')
-@include('admin.includes.add-project-modal')
 
 @section('content')
     <div class="container-fluid">
@@ -87,8 +81,8 @@
                                                 // Determine the badge class based on the status_id
                                                 $badgeClass = $status_id === 1 ? 'success' : 'danger'; // You can add more conditions as needed
                                             @endphp
-                                            {{-- <span class="badge badge-{{ $badgeClass }}">{{ $statusName }}</span> --}}
-                                            <span>{{ $statusName }}</span>
+                                            <span class="badge badge-{{ $badgeClass }}">{{ $statusName }}</span>
+                                            {{-- <span>{{ $statusName }}</span> --}}
                                         </td>
                                         <td>
                                             {{-- @php
@@ -135,7 +129,12 @@
         </div> {{-- .card END --}}
 </div> {{-- .container-fluid END --}}
 
+@include('admin.includes.edit-project-modal')
+@include('admin.includes.delete-project-modal')
+@include('admin.includes.add-project-modal')
+
 @section('script')
+<script src="{{ asset('js/admin/ckeditor.js') }}"> </script>
 <script>
     // Handle the click event for the edit button
     $('.btn-secondary').on('click', function () {
@@ -158,6 +157,5 @@
         $('#deleteProjectId').val(projectId);
     });
 </script>
-<script src="{{ asset('js/admin/ckeditor.js') }}"> </script>
 @endsection
 @endsection
