@@ -16,6 +16,7 @@ class UserController extends Controller
 
     public function showLogin()
     {
+        //FOR FRESH CLONE UNCOMMENT THIS AND GOTO LOGIN ROUTE THEN COMMENT IT AGAIN
         // $campus = [
         //     'location' => 'Tandag',
         // ];
